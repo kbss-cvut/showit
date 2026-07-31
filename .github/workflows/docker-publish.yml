@@ -9,8 +9,6 @@ on:
 
 env:
   IMAGE_NAME: showit
-  PUBLIC_PATH: /prohlížíme
-  SPARQL_ENDPOINT: https://xn--slovnk-7va.gov.cz/prohlizime/sluzby/db-server/repositories/termit
 
 jobs:
   # Push image to GitHub Packages.
@@ -20,13 +18,13 @@ jobs:
     if: github.event_name == 'push'
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Build image
-        run: docker build . --file Dockerfile --build-arg PUBLIC_PATH=$PUBLIC_PATH --build-arg REACT_APP_SPARQL_ENDPOINT=$SPARQL_ENDPOINT --tag $IMAGE_NAME
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
 
       - name: Push image
         run: |
