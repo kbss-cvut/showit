@@ -1,7 +1,6 @@
 import React from "react";
-import { Box, Container, styled, Typography } from "@mui/material";
-import opzLogo from "./assets/opz_logo.svg";
-import { ReactComponent as FooterImage } from "./assets/footer_image.svg";
+import {Box, Container, styled, Typography} from "@mui/material";
+import {ReactComponent as FooterImage} from "./assets/footer_image.svg";
 
 const Illustration = styled(FooterImage)(({ theme }) => ({
   position: "absolute",
@@ -40,11 +39,15 @@ const Footer: React.FC<FooterProps> = (props) => {
         <Container maxWidth="lg">
           <Wrapper>
             <Typography variant="body2" color="textSecondary">
-              Tato aplikace je udržována v rámci projektu
-              <br />
-              OPZ č. CZ.03.4.74/0.0/0.0/15_025/0013983.
+              <a
+                  href="https://kbss.felk.cvut.cz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="KBSS FEL ČVUT v Praze"
+              >
+                &copy;&nbsp;KBSS FEL ČVUT v Praze, {new Date().getFullYear()}
+              </a>
             </Typography>
-            <img src={opzLogo} alt="OPZ" height={50} />
           </Wrapper>
         </Container>
       </Box>
