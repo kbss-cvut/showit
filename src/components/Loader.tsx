@@ -10,11 +10,7 @@ interface LoaderProps {
 const Loader: React.FC<LoaderProps & TypographyProps> = (props) => {
   return (
     <Box flex={1} display="flex" alignItems="center" justifyContent="center">
-      <DotLoader
-        color={theme.palette.primary.main}
-        size={props.size}
-        css="display: block;"
-      />
+      <DotLoader color={theme.palette.primary.main} size={props.size} />
       <Box pl={3}>
         <Typography variant="h2" {...props}>
           Načítání
