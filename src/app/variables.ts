@@ -1,2 +1,3 @@
-export const PUBLIC_PATH = process.env.PUBLIC_URL;
-export const SPARQL_ENDPOINT = process.env.REACT_APP_SPARQL_ENDPOINT;
+import {getEnv} from "../utils/Utils";
+
+export const APP_CONTEXT = getEnv("APP_CONTEXT");

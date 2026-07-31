@@ -23,7 +23,7 @@ export const lucene = createNamespace({
 export const luceneInstance = createNamespace({
   iri: "http://www.ontotext.com/connectors/lucene/instance#",
   prefix: "luceneinstance:",
-  terms: ["label_index", "defcom_index"],
+  terms: ["termit_labelIndex_", "termit_defcomIndex_"],
 } as const);
 
 export const owl = createNamespace({

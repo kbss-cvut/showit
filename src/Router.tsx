@@ -14,7 +14,7 @@ import ErrorPage from "./components/ErrorPage";
 import DisambiguationPage from "./components/search/DisambiguationPage";
 import TermPage from "./components/terms/TermPage";
 import VocabularyPage from "./components/vocabularies/VocabularyPage";
-import { PUBLIC_PATH } from "./app/variables";
+import { APP_CONTEXT } from "./app/variables";
 import VocabulariesPage from "./components/vocabularies/VocabulariesPage";
 
 const InitialLocationFix: React.FC = () => {
@@ -24,9 +24,9 @@ const InitialLocationFix: React.FC = () => {
   const location = useLocation();
   const history = useHistory();
   // The replace should happen only once since we strip it only if it contains something more than /
-  if (PUBLIC_PATH.length > 1 && location.pathname.startsWith(PUBLIC_PATH)) {
+  if (APP_CONTEXT.length > 1 && location.pathname.startsWith(APP_CONTEXT)) {
     history.replace({
-      pathname: location.pathname.substring(PUBLIC_PATH.length),
+      pathname: location.pathname.substring(APP_CONTEXT.length),
       search: location.search,
     });
   }
@@ -35,7 +35,7 @@ const InitialLocationFix: React.FC = () => {
 
 const Router: React.FC = () => {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter basename={APP_CONTEXT}>
       <InitialLocationFix />
       <ScrollToTop />
       <Layout>

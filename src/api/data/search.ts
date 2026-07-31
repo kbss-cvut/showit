@@ -88,9 +88,9 @@ CONSTRUCT {
   ?vocabulary ${n(dcterms.title)} ?vocabularyTitle .
 } WHERE {
   SELECT DISTINCT ?entity ?label ?definition ?vocabulary ?vocabularyTitle ?snippetField ?snippetText ?score {
-    { ?search a ${n(luceneInstance.label_index)} } 
+    { ?search a ${n(luceneInstance.termit_labelIndex_)} } 
     UNION 
-    { ?search a ${n(luceneInstance.defcom_index)} }
+    { ?search a ${n(luceneInstance.termit_defcomIndex_)} }
     ?search ${n(lucene.query)} ${l(wildcardString)} ;
             ${n(lucene.snippetSize)} 100 ;
             ${n(lucene.entities)} ?entity . 
@@ -142,9 +142,9 @@ CONSTRUCT {
           ${n(lucene.score)} ?score .
 } WHERE {
   SELECT DISTINCT ?entity ?label ?definition ?snippetField ?snippetText ?score {
-    { ?search a ${n(luceneInstance.label_index)} } 
+    { ?search a ${n(luceneInstance.termit_labelIndex_)} } 
     UNION 
-    { ?search a ${n(luceneInstance.defcom_index)} }
+    { ?search a ${n(luceneInstance.termit_defcomIndex_)} }
     ?search ${n(lucene.query)} ${l(wildcardString)} ;
             ${n(lucene.snippetSize)} 2000 ;
             ${n(lucene.entities)} ?entity . 

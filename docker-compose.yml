@@ -9,12 +9,12 @@ services:
     volumes:
       - ./nginx:/etc/nginx/templates
     ports:
-      - "80:80"
+      - "1234:80"
   showit:
     env_file:
       - .env.docker-compose
     build:
       context: .
-      args:
-        PUBLIC_PATH: /prohlížíme
-        REACT_APP_SPARQL_ENDPOINT: https://xn--slovnk-7va.gov.cz/prohlizime/sluzby/db-server/repositories/termit
+    environment:
+      APP_CONTEXT: /prohlížíme
+      SPARQL_ENDPOINT: https://xn--slovnk-7va.gov.cz/prohlizime/sluzby/db-server/repositories/termit

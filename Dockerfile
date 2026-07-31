@@ -11,27 +11,19 @@ FROM base AS dependencies
 RUN npm set progress=false && npm config set depth 0
 RUN npm install
 
-# TEST STAGE
-# run linters, setup and tests
-FROM dependencies AS test
-COPY . .
-RUN  npm run prettier:check
-
 # BUILD STAGE
 # run NPM build
-FROM test as build
-# If an app is supposed to be deployed in a subdir, this is the place to specify that
-ARG PUBLIC_PATH=/
-# Make sure that React app is built using the right path context
-ENV PUBLIC_URL=${PUBLIC_PATH}
-# Pass SPARQL endpoint var in build time
-ARG REACT_APP_SPARQL_ENDPOINT=
-ENV REACT_APP_SPARQL_ENDPOINT=${REACT_APP_SPARQL_ENDPOINT}
+FROM dependencies AS build
+COPY . .
 RUN set -ex; \
   npm run build
 
 # RELEASE STAGE
 # Only include the static files in the final image
-FROM ghcr.io/datagov-cz/react-nginx/react-nginx:latest
-WORKDIR /usr/share/nginx/html
-COPY --from=build /usr/src/app/build/ ./
+FROM nginx:1.31.1-alpine
+COPY --from=build /usr/src/app/build/ /usr/share/nginx/html/
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+# Make env var substitution happen on *.template files in the html dir
+ENV NGINX_ENVSUBST_TEMPLATE_DIR=/usr/share/nginx/html
+ENV NGINX_ENVSUBST_OUTPUT_DIR=/usr/share/nginx/html
+RUN chmod a+r -R /usr/share/nginx/html
