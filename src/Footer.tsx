@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, styled, Typography } from "@mui/material";
+import { Box, Container, Link, styled } from "@mui/material";
 import { ReactComponent as FooterImage } from "./assets/footer_image.svg";
 
 const Illustration = styled(FooterImage)(({ theme }) => ({
@@ -38,16 +38,15 @@ const Footer: React.FC<FooterProps> = (props) => {
       <Box bgcolor="primary.main" py={1}>
         <Container maxWidth="lg">
           <Wrapper>
-            <Typography variant="body2" color="textSecondary">
-              <a
-                href="https://kbss.felk.cvut.cz"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="KBSS FEL ČVUT v Praze"
-              >
-                &copy;&nbsp;KBSS FEL ČVUT v Praze, {new Date().getFullYear()}
-              </a>
-            </Typography>
+            <Link
+              href="https://kbss.felk.cvut.cz"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="KBSS FEL ČVUT v Praze"
+              color="textSecondary"
+            >
+              &copy;&nbsp;KBSS FEL ČVUT v Praze, {new Date().getFullYear()}
+            </Link>
           </Wrapper>
         </Container>
       </Box>
