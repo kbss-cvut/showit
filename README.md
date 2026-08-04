@@ -1,36 +1,40 @@
-# sgov-browser
+# ShowIt
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based web application for browsing SKOS vocabularies and terms published by
+TermIt and the SGoV (Sémantický slovník pojmů veřejné správy) ecosystem.
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+ShowIt is a lightweight, read-only browser for RDF vocabularies and their terms.
+It connects to a SPARQL endpoint and lets users search, list, and explore
+vocabularies (`slovníky`) and individual terms (`pojmy`) with their definitions,
+hierarchies, and semantic relations.
 
-### `npm start`
+The application is built with **Create React App** and **TypeScript**, styled with
+**Material UI (MUI)**.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Development Requirements
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Requires **Node.js 16+** and **npm**.
 
-### `npm run build`
+## Configuration
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The application reads configuration from two sources:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+1. **Build-time environment variables** prefixed with `REACT_APP_`:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   | Variable          | Purpose                                 | Example                                     |
+   |-------------------|-----------------------------------------|---------------------------------------------|
+   | `SPARQL_ENDPOINT` | SPARQL endpoint for ldkit queries       | `http://localhost:7200/repositories/termit` |
+   | `SUGGESTED_WORDS` | Comma-separated list of suggested words | `Délka,Lokalita,Dokumentace,Demolice`       |
+   | `APP_CONTEXT`     | Base URL path of the application        | `/prohlizime`                               |
 
-### `npm run prettier:check`
+2. **Runtime `config.js`** – For deployments where the build is served statically,
+   `public/config.js` (or an equivalent file) can inject values through `window.__config__`.
+   See `src/utils/Utils.ts` for the merging logic.
 
-Checks the code style in all files in the `src` folder using [Prettier](https://prettier.io).
+## License
 
-### `npm run prettier:fix`
+This project is licensed under the [MIT License](LICENSE).
 
-Fixes the code style in all files in the `src` folder using [Prettier](https://prettier.io).
-
-Prohlížeč slov a pojmů v SSP. Tento repozitář je udržován v rámci projektu OPZ č. CZ.03.4.74/0.0/0.0/15_025/0013983.
-![Evropská unie - Evropský sociální fond - Operační program Zaměstnanost](https://data.gov.cz/images/ozp_logo_cz.jpg)
+This project is a fork of [sgov-browser](https://github.com/datagov-cz/showit).
