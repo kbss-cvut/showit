@@ -1,5 +1,6 @@
 // Dynamic configuration
 window.__config__ = {
   SPARQL_ENDPOINT: '${SPARQL_ENDPOINT}',
-  APP_CONTEXT: '${APP_CONTEXT}'
+  APP_CONTEXT: '${APP_CONTEXT}',
+  SUGGESTED_WORDS: '${SUGGESTED_WORDS}'
 }
