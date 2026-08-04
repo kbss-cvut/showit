@@ -5,12 +5,12 @@ import { TermBase } from "../api/TermAPI";
  */
 const ENV = {
   ...Object.keys(process.env)
-      .filter((key) => key.startsWith("REACT_APP_"))
-      .reduce<Record<string, string>>((acc, key) => {
-        const strippedKey = key.replace("REACT_APP_", "");
-        acc[strippedKey] = (process.env as Record<string, string>)[key];
-        return acc;
-      }, {}),
+    .filter((key) => key.startsWith("REACT_APP_"))
+    .reduce<Record<string, string>>((acc, key) => {
+      const strippedKey = key.replace("REACT_APP_", "");
+      acc[strippedKey] = (process.env as Record<string, string>)[key];
+      return acc;
+    }, {}),
   ...(window as any).__config__,
 };
 

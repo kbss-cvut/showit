@@ -1,5 +1,5 @@
-import {type Context} from "ldkit";
-import {getEnv} from "../../utils/Utils";
+import { type Context } from "ldkit";
+import { getEnv } from "../../utils/Utils";
 
 // We should probably move the check somewhere else
 if (!getEnv("SPARQL_ENDPOINT")) {

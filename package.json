@@ -27,7 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier:check": "prettier --check ./src",
-    "prettier:fix": "prettier --write ./src"
+    "prettier:fix": "prettier --write ./src",
+    "prepare": "husky"
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +56,8 @@
     "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.1.8",
     "@types/react-window": "^1.8.5",
-    "prettier": "2.8.7"
+    "husky": "^9.1.7",
+    "prettier": "2.8.7",
+    "pretty-quick": "^3.3.1"
   }
 }

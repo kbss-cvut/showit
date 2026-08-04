@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container, styled, Typography } from "@mui/material";
 import RouteLink from "./RouteLink";
-import {getEnv} from "../utils/Utils";
+import { getEnv } from "../utils/Utils";
 
 const Wrapper = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -15,7 +15,9 @@ const Wrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
-const DEFAULT_SUGGESTED_WORDS = ["Agenda", "Budova", "Vozidlo", "Závada"].join(",");
+const DEFAULT_SUGGESTED_WORDS = ["Agenda", "Budova", "Vozidlo", "Závada"].join(
+  ","
+);
 
 const SuggestedWords: React.FC = () => {
   const wordsConfig = getEnv("SUGGESTED_WORDS", DEFAULT_SUGGESTED_WORDS);

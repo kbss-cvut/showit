@@ -1,6 +1,6 @@
 import React from "react";
-import {Box, Container, styled, Typography} from "@mui/material";
-import {ReactComponent as FooterImage} from "./assets/footer_image.svg";
+import { Box, Container, styled, Typography } from "@mui/material";
+import { ReactComponent as FooterImage } from "./assets/footer_image.svg";
 
 const Illustration = styled(FooterImage)(({ theme }) => ({
   position: "absolute",
@@ -40,10 +40,10 @@ const Footer: React.FC<FooterProps> = (props) => {
           <Wrapper>
             <Typography variant="body2" color="textSecondary">
               <a
-                  href="https://kbss.felk.cvut.cz"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="KBSS FEL ČVUT v Praze"
+                href="https://kbss.felk.cvut.cz"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="KBSS FEL ČVUT v Praze"
               >
                 &copy;&nbsp;KBSS FEL ČVUT v Praze, {new Date().getFullYear()}
               </a>
