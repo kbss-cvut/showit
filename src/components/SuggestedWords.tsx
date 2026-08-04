@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Container, styled, Typography } from "@mui/material";
 import RouteLink from "./RouteLink";
+import {getEnv} from "../utils/Utils";
 
 const Wrapper = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -14,9 +15,11 @@ const Wrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
+const DEFAULT_SUGGESTED_WORDS = ["Agenda", "Budova", "Vozidlo", "Závada"].join(",");
+
 const SuggestedWords: React.FC = () => {
-  //Only for development purposes, need to discuss how to fetch this personalized data
-  const words = ["Agenda", "Budova", "Vozidlo", "Závada"];
+  const wordsConfig = getEnv("SUGGESTED_WORDS", DEFAULT_SUGGESTED_WORDS);
+  const words = wordsConfig.split(",").map((word) => word.trim());
 
   return (
     <Container>
