@@ -159,6 +159,7 @@ CONSTRUCT {
         ${n(lucene.snippetField)} ?snippetField .
     FILTER (lang(?label) = "cs")
     FILTER (?entity != ${n(HIDDEN_VOCABULARY)})
+    FILTER NOT EXISTS { ?entity a ${n(popisDat["verze-objektu"])} }
     BIND(IF(lcase(str(?snippetText)) = lcase(str(${l(
       exactMatchString
     )})), ?initScore * 2, IF(CONTAINS(lcase(str(?snippetText)), ${l(
