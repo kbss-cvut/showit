@@ -39,6 +39,11 @@ export const TermBaseSchema = {
     "@id": skos.definition,
     "@optional": true,
   },
+  notation: {
+    "@id": skos.notation,
+    "@optional": true,
+    "@array": true,
+  },
 } as const;
 
 const TermSchema = {

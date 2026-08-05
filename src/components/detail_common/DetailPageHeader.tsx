@@ -1,10 +1,10 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import IRI from "./IRI";
 
 interface DetailPageHeaderProps {
   aboveLabel: ReactElement;
-  label: string;
+  label: ReactNode;
   belowLabel?: ReactElement;
   iri: string;
 }
