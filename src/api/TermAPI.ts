@@ -3,12 +3,15 @@ import { useQuery } from "react-query";
 import {
   getPropertyRelationsQuery,
   getTermRelationsQuery,
+  getTermSkosRelationsQuery,
   getTermTypeQuery,
   TermBaseInterface,
   TermInterface,
   TermRelationsInterface,
   Terms,
+  TermSkosRelationsInterface,
   TermsRelationsResource,
+  TermsSkosRelationsResource,
   TermsTypes,
 } from "./data/terms";
 import { HIDDEN_VOCABULARY } from "./data/vocabularies";
@@ -56,6 +59,17 @@ export const getRelations = async (
   }
 };
 
+export const getSkosRelations = async (
+  term: TermInterface | undefined
+): Promise<TermSkosRelationsInterface[]> => {
+  if (typeof term === "undefined") {
+    return Promise.reject("Invalid term");
+  }
+  return await TermsSkosRelationsResource.query(
+    getTermSkosRelationsQuery(term.$id)
+  );
+};
+
 export type RelationResult = ReturnType<typeof getRelations> extends Promise<
   (infer U)[]
 >
@@ -75,6 +89,13 @@ export const useTerm = (term: TermBase) => {
 
 export const useRelations = (term: TermInterface | undefined) => {
   return useQuery(["relations", term?.$id], () => getRelations(term), {
+    enabled: !!term,
+    notifyOnChangeProps: ["data", "isError"],
+  });
+};
+
+export const useSkosRelations = (term: TermInterface | undefined) => {
+  return useQuery(["skos-relations", term?.$id], () => getSkosRelations(term), {
     enabled: !!term,
     notifyOnChangeProps: ["data", "isError"],
   });

@@ -10,6 +10,7 @@ import ErrorPage from "../ErrorPage";
 import Relations from "./Relations";
 import useRouteQuery from "../../hooks/useRouteQuery";
 import { generateTermBase } from "../../utils/Utils";
+import { SkosRelations } from "./SkosRelations";
 
 const TermPage: React.FC = () => {
   const routeQuery = useRouteQuery();
@@ -36,6 +37,7 @@ const TermPage: React.FC = () => {
         <Hierarchy term={data} />
         {/**Relations component checks if the term is empty, because it is the last one**/}
         <Relations term={data} />
+        <SkosRelations term={data} />
       </Box>
     );
   }

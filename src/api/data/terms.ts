@@ -96,8 +96,21 @@ const TermTypesSchema = {
   },
 } as const;
 
+const TermSkosRelationsSchema = {
+  "@type": skos.Concept,
+  related: {
+    "@id": skos.related,
+    "@array": true,
+    "@context": RelationItemSchema,
+  },
+} as const;
+
 export type TermRelationsInterface = SchemaInterface<
   typeof TermRelationsSchema
+>;
+
+export type TermSkosRelationsInterface = SchemaInterface<
+  typeof TermSkosRelationsSchema
 >;
 
 export type TermInterface = SchemaInterface<typeof TermSchema>;
@@ -109,6 +122,11 @@ export const TermsTypes = createResource(TermTypesSchema, context);
 
 export const TermsRelationsResource = createResource(
   TermRelationsSchema,
+  context
+);
+
+export const TermsSkosRelationsResource = createResource(
+  TermSkosRelationsSchema,
   context
 );
 
@@ -270,4 +288,23 @@ WHERE {
   `.toString();
 
   return query;
+};
+
+export const getTermSkosRelationsQuery = (termIri: string) => {
+  return $`
+  CONSTRUCT {
+    ?term a ${n(skos.Concept)} ; a ${n(ldkit.Resource)} .
+    ?term ${n(skos.related)} ?related .
+    ?related ${n(skos.prefLabel)} ?relatedLabel .
+    ?related ${n(popisDat["je-pojmem-ze-slovníku"])} ?relatedVocabulary .
+    ?relatedVocabulary ${n(dcterms.title)} ?relatedVocabularyTitle .
+  } WHERE {
+    BIND(${n(termIri)} as ?term)
+    ?term (${n(skos.related)}|${n(skos.relatedMatch)}) ?related .
+    ?related ${n(skos.prefLabel)} ?relatedLabel .
+    ?related ${n(popisDat["je-pojmem-ze-slovníku"])} ?relatedVocabulary .
+    ?relatedVocabulary ${n(dcterms.title)} ?relatedVocabularyTitle .
+    FILTER (?relatedVocabulary != ${n(HIDDEN_VOCABULARY)})
+  } 
+`.toString();
 };

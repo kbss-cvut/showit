@@ -22,7 +22,7 @@ export const Hierarchy: React.FC<HierarchyProps> = ({ term }) => {
       <Box py={2} mb={2} px={2} mt={4}>
         <Box borderLeft={4} pr={6} borderColor="primary.main">
           <Box pl={4}>
-            <Typography variant="h5">Související pojmy</Typography>
+            <Typography variant="h5">Hierarchie</Typography>
           </Box>
           <Box pl={2}>
             <HierarchyParents

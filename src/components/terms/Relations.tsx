@@ -64,7 +64,11 @@ const Relations: React.FC<RelationsProperty> = ({ term }) => {
       );
     }
 
-    return <DetailItemWrapper title="Vztahy">{content}</DetailItemWrapper>;
+    return (
+      <DetailItemWrapper title="Vymodelované vztahy">
+        {content}
+      </DetailItemWrapper>
+    );
   }
   return null;
 };
