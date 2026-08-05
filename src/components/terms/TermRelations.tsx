@@ -12,7 +12,7 @@ export interface RelationsItemProps {
   ranges: ReactElement[];
 }
 
-const TermBox = styled(Box)(({ theme }) => ({
+export const TermBox = styled(Box)(({ theme }) => ({
   flex: 3,
   minWidth: 165,
   display: "flex",
