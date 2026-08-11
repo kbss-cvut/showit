@@ -4,7 +4,7 @@ import { ReactComponent as DefinitionIllustration } from "../../assets/definitio
 import DefinitionWrapper from "../detail_common/DefinitionWrapper";
 
 interface VocabularyDefinitionProps {
-  description?: string;
+  description?: string | null;
 }
 
 const VocabularyDefinition: React.FC<VocabularyDefinitionProps> = (props) => {

@@ -4,7 +4,6 @@ import {
   getPropertyRelationsQuery,
   getTermRelationsQuery,
   getTermSkosRelationsQuery,
-  getTermTypeQuery,
   TermBaseInterface,
   TermInterface,
   TermRelationsInterface,
@@ -12,7 +11,6 @@ import {
   TermSkosRelationsInterface,
   TermsRelationsResource,
   TermsSkosRelationsResource,
-  TermsTypes,
 } from "./data/terms";
 import { HIDDEN_VOCABULARY } from "./data/vocabularies";
 import { isProperty } from "../utils/TermUtils";
@@ -31,8 +29,6 @@ export const getTerm = async (term: TermBase) => {
     // Term not found
     throw new Error("404 Term not found");
   }
-  const types = await TermsTypes.query(getTermTypeQuery(term.$id));
-  (data.$type as string[]) = types[0].$type;
   //Removes all mentions of terms coming from hidden vocabulary
   (data.parentTerms as TermBaseInterface[]) = data.parentTerms.filter(
     (term) => term.vocabulary.$id !== HIDDEN_VOCABULARY

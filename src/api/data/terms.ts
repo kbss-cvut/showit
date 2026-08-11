@@ -1,9 +1,9 @@
-import { createResource, SchemaInterface } from "ldkit";
+import { createLens, type SchemaInterface } from "ldkit";
 import { dcterms, ldkit, rdf, skos } from "ldkit/namespaces";
 
-import { context } from "./context";
+import { options } from "./context";
 import { owl, popisDat, rdfs, zSgovPojem } from "./namespaces";
-import { $ } from "ldkit/sparql";
+import { sparql } from "ldkit/sparql";
 import { n } from "./utils";
 import { HIDDEN_VOCABULARY } from "./vocabularies";
 
@@ -12,7 +12,7 @@ const RelationItemSchema = {
   label: skos.prefLabel,
   vocabulary: {
     "@id": popisDat["je-pojmem-ze-slovníku"],
-    "@context": {
+    "@schema": {
       "@type": popisDat["slovník"],
       label: {
         "@id": dcterms.title,
@@ -24,10 +24,14 @@ const RelationItemSchema = {
 
 export const TermBaseSchema = {
   "@type": skos.Concept,
+  $type: {
+    "@id": rdf.type,
+    "@array": true,
+  },
   label: skos.prefLabel,
   vocabulary: {
     "@id": popisDat["je-pojmem-ze-slovníku"],
-    "@context": {
+    "@schema": {
       "@type": popisDat["slovník"],
       label: {
         "@id": dcterms.title,
@@ -61,13 +65,13 @@ const TermSchema = {
     "@id": skos.broader,
     "@optional": true,
     "@array": true,
-    "@context": TermBaseSchema,
+    "@schema": TermBaseSchema,
   },
   subTerms: {
     "@id": skos.narrower,
     "@optional": true,
     "@array": true,
-    "@context": TermBaseSchema,
+    "@schema": TermBaseSchema,
   },
 } as const;
 
@@ -77,13 +81,13 @@ const TermRelationsSchema = {
     "@id": rdfs.domain,
     "@array": true,
     "@optional": true,
-    "@context": RelationItemSchema,
+    "@schema": RelationItemSchema,
   },
   range: {
     "@id": rdfs.range,
     "@array": true,
     "@optional": true,
-    "@context": RelationItemSchema,
+    "@schema": RelationItemSchema,
   },
 } as const;
 
@@ -101,7 +105,7 @@ const TermSkosRelationsSchema = {
   related: {
     "@id": skos.related,
     "@array": true,
-    "@context": RelationItemSchema,
+    "@schema": RelationItemSchema,
   },
 } as const;
 
@@ -117,21 +121,18 @@ export type TermInterface = SchemaInterface<typeof TermSchema>;
 
 export type TermBaseInterface = SchemaInterface<typeof TermBaseSchema>;
 
-export const Terms = createResource(TermSchema, context);
-export const TermsTypes = createResource(TermTypesSchema, context);
+export const Terms = createLens(TermSchema, options);
+export const TermsTypes = createLens(TermTypesSchema, options);
 
-export const TermsRelationsResource = createResource(
-  TermRelationsSchema,
-  context
-);
+export const TermsRelationsResource = createLens(TermRelationsSchema, options);
 
-export const TermsSkosRelationsResource = createResource(
+export const TermsSkosRelationsResource = createLens(
   TermSkosRelationsSchema,
-  context
+  options
 );
 
 export const getTermRelationsQuery = (termIri: string) => {
-  const query = $`
+  const query = sparql`
 CONSTRUCT{ 
   ?term a ${n(skos.Concept)} ; a ${n(ldkit.Resource)} .
   ?term ${n(rdfs.domain)} ?domain .
@@ -203,13 +204,13 @@ WHERE {
   FILTER (?vocabulary2 != ${n(HIDDEN_VOCABULARY)})
   
 }
-  `.toString();
+  `;
 
   return query;
 };
 
 export const getPropertyRelationsQuery = (propertyIri: string) => {
-  const query = $`
+  const query = sparql`
 CONSTRUCT{ 
   ?term a ${n(skos.Concept)} ; a ${n(ldkit.Resource)} .
   ?term ${n(rdfs.domain)} ?domain .
@@ -269,13 +270,13 @@ WHERE {
   FILTER (?vocabulary != ${n(HIDDEN_VOCABULARY)})
   FILTER (?vocabulary2 != ${n(HIDDEN_VOCABULARY)})
 }
-  `.toString();
+  `;
 
   return query;
 };
 
 export const getTermTypeQuery = (termIri: string) => {
-  const query = $`
+  const query = sparql`
 CONSTRUCT{ 
   ?term a ${n(skos.Concept)} ; a ${n(ldkit.Resource)} .
   ?term a ?allTypes .
@@ -285,13 +286,13 @@ WHERE {
    ?term ${n(rdf.type)} ?allTypes .
    FILTER(!isBlank(?allTypes))
 }
-  `.toString();
+  `;
 
   return query;
 };
 
 export const getTermSkosRelationsQuery = (termIri: string) => {
-  return $`
+  return sparql`
   CONSTRUCT {
     ?term a ${n(skos.Concept)} ; a ${n(ldkit.Resource)} .
     ?term ${n(skos.related)} ?related .
@@ -306,5 +307,5 @@ export const getTermSkosRelationsQuery = (termIri: string) => {
     ?relatedVocabulary ${n(dcterms.title)} ?relatedVocabularyTitle .
     FILTER (?relatedVocabulary != ${n(HIDDEN_VOCABULARY)})
   } 
-`.toString();
+`;
 };

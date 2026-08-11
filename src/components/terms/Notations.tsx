@@ -1,11 +1,13 @@
 import React from "react";
-import { Chip } from "@mui/material";
+import { Chip, Tooltip } from "@mui/material";
 
 export const Notations: React.FC<{ notation: string[] }> = ({ notation }) => {
   return (
     <>
       {notation.map((n) => (
-        <Chip label={n} variant="outlined" color="secondary" />
+        <Tooltip title="Notace" key={n}>
+          <Chip label={n} variant="outlined" color="secondary" />
+        </Tooltip>
       ))}
     </>
   );

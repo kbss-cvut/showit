@@ -1,9 +1,9 @@
-import { SchemaInterface, createResource } from "ldkit";
+import { createLens, type SchemaInterface } from "ldkit";
 import { xsd, skos, dcterms, ldkit } from "ldkit/namespaces";
-import { $ } from "ldkit/sparql";
+import { sparql } from "ldkit/sparql";
 import { lucene, luceneInstance, popisDat } from "./namespaces";
 import { n, l } from "./utils";
-import { context } from "./context";
+import { options } from "./context";
 import { HIDDEN_VOCABULARY } from "./vocabularies";
 
 const VocabularySchema = {
@@ -20,7 +20,7 @@ const SearchSchema = {
   },
   vocabulary: {
     "@id": popisDat["je-pojmem-ze-slovníku"],
-    "@context": VocabularySchema,
+    "@schema": VocabularySchema,
   },
   snippetField: lucene.snippetField,
   snippetText: lucene.snippetText,
@@ -49,11 +49,11 @@ const VocabularySearchSchema = {
 
 export type SearchInterface = SchemaInterface<typeof SearchSchema>;
 
-export const SearchResource = createResource(SearchSchema, context);
+export const SearchResource = createLens(SearchSchema, options);
 
-export const VocabularySearchResource = createResource(
+export const VocabularySearchResource = createLens(
   VocabularySearchSchema,
-  context
+  options
 );
 
 // Search query utils
@@ -76,7 +76,7 @@ export const getSearchQuery = (text: string) => {
   // wrap words with <em> tags for exact matching in Lucene index
   const exactMatchString = getExactMatchString(text);
 
-  const query = $`
+  const query = sparql`
 CONSTRUCT {
   ?entity a ${n(skos.Concept)} , ${n(ldkit.Resource)} ;
           ${n(skos.prefLabel)} ?label ;
@@ -118,7 +118,7 @@ CONSTRUCT {
   ORDER BY desc(?score)
   LIMIT 100
 }
-`.toString();
+`;
 
   return query;
 };
@@ -133,7 +133,7 @@ export const getVocabularySearchQuery = (text: string) => {
   const wildcardString = getWildcardString(text);
   const exactMatchString = getExactMatchString(text);
 
-  const query = $`
+  const query = sparql`
 CONSTRUCT {
   ?entity a ${n(popisDat["slovník"])} , ${n(ldkit.Resource)} ;
           ${n(dcterms.title)} ?label ;
@@ -171,7 +171,7 @@ CONSTRUCT {
   ORDER BY desc(?score)
   LIMIT 100
 }
-`.toString();
+`;
 
   return query;
 };
