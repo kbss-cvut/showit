@@ -3,6 +3,7 @@ import { ReactComponent as DefinitionIllustration } from "../../assets/definitio
 import { Box } from "@mui/material";
 import DefinitionWrapper from "../detail_common/DefinitionWrapper";
 import { TermInterface } from "../../api/data/terms";
+import { getLocalized } from "../../utils/LabelUtils";
 
 interface DefinitionProps {
   term: TermInterface;
@@ -22,7 +23,7 @@ const TermDefinition: React.FC<DefinitionProps> = ({ term }) => {
   return (
     <DefinitionWrapper
       illustration={illustration}
-      definition={term.definition}
+      definition={getLocalized(term.definition)}
       source={term.source}
     />
   );

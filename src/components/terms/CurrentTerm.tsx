@@ -2,6 +2,7 @@ import React from "react";
 import HierarchyItem from "./HierarchyItem";
 import { Box, Paper, styled, Typography } from "@mui/material";
 import { TermAccordionProps } from "./TermAccordion";
+import { getLocalized } from "../../utils/LabelUtils";
 
 const CurrentTermBox = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
@@ -26,7 +27,7 @@ const CurrentTerm: React.FC<TermAccordionProps> = (props) => {
       >
         <CurrentTermBox square elevation={0}>
           <Typography variant="h6" color="textSecondary">
-            {props.term.label}
+            {getLocalized(props.term.label)}
           </Typography>
         </CurrentTermBox>
       </Box>

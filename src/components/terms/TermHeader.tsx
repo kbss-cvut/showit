@@ -5,6 +5,7 @@ import DetailPageHeader from "../detail_common/DetailPageHeader";
 import RouteLink from "../RouteLink";
 import { generateVocabularyRoute } from "../../utils/Utils";
 import { TermInterface } from "../../api/data/terms";
+import { getLocalized } from "../../utils/LabelUtils";
 import { Notations } from "./Notations";
 
 export interface DetailHeaderProps {
@@ -17,7 +18,7 @@ const TermHeader: React.FC<DetailHeaderProps> = ({ term }) => {
   const vocabularyRoute = generateVocabularyRoute(vocabulary.$id);
   const above = (
     <RouteLink to={vocabularyRoute} variant="h5" color="textSecondary">
-      {vocabulary.label || vocabulary.$id}
+      {getLocalized(vocabulary.label) || vocabulary.$id}
     </RouteLink>
   );
   const below = <AltLabel altLabels={altLabels} />;
@@ -25,13 +26,13 @@ const TermHeader: React.FC<DetailHeaderProps> = ({ term }) => {
   const title =
     notation.length > 0 ? (
       <>
-        {label}
+        {getLocalized(label)}
         <Box component="span" sx={{ marginLeft: "0.25rem" }}>
           <Notations notation={notation} />
         </Box>
       </>
     ) : (
-      label
+      getLocalized(label)
     );
 
   return (

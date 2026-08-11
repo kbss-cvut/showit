@@ -3,11 +3,8 @@ import React, { useMemo, useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { ReactWindowScroller } from "../../utils/ReactWindowScroller";
 import makeStyles from "@mui/styles/makeStyles";
-import {
-  VocabularyInterface,
-  VocabularyTermInterface,
-} from "../../api/data/vocabularies";
 import { DetailItemWrapper } from "../terms/Hierarchy";
+import { getLocalized, MultilingualString } from "../../utils/LabelUtils";
 import { Box, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -40,8 +37,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+interface ListItem {
+  $id: string;
+  $type?: string[];
+  label: string | MultilingualString;
+}
+
 interface VocabularyAndTermsListProps {
-  data: VocabularyTermInterface[] | VocabularyInterface[];
+  data: ListItem[];
   routeResolver: (id: string) => string;
   listLabel: string;
   searchHelperText: string;
@@ -91,14 +94,16 @@ const VocabularyAndTermsListWindow: React.FC<VocabularyAndTermsListProps> = ({
       .filter((term) => {
         if (filterText === "") return true;
         else {
-          return term.label.toLowerCase().includes(filterText.toLowerCase());
+          return getLocalized(term.label)
+            .toLowerCase()
+            .includes(filterText.toLowerCase());
         }
       })
       .map((term) => {
         return {
           $id: term.$id,
           $type: term.$type,
-          label: getHighlightedText(term.label, filterText),
+          label: getHighlightedText(getLocalized(term.label), filterText),
         };
       });
   }, [data, filterText]);
