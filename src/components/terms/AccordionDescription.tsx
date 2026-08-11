@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography } from "@mui/material";
 import { TermBaseInterface } from "../../api/data/terms";
+import { getLocalized } from "../../utils/LabelUtils";
 
 interface AccordionDescriptionProps {
   term: TermBaseInterface;
@@ -9,7 +10,9 @@ interface AccordionDescriptionProps {
 const AccordionDescription: React.FC<AccordionDescriptionProps> = ({
   term,
 }) => {
-  const description = term.definition ? term.definition : "Pojem nemá definici";
+  const description = term.definition
+    ? getLocalized(term.definition)
+    : "Pojem nemá definici";
 
   return <Typography>{description}</Typography>;
 };

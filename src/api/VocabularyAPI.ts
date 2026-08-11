@@ -1,4 +1,5 @@
 import { useQuery } from "react-query";
+import { getLocalized } from "../utils/LabelUtils";
 import {
   getVocabularyTermsQuery,
   HIDDEN_VOCABULARY,
@@ -51,7 +52,9 @@ const getVocabularyTerms = async (vocabularyIri: string) => {
     getVocabularyTermsQuery(vocabularyIri)
   );
 
-  data.sort((a, b) => a.label.localeCompare(b.label));
+  data.sort((a, b) =>
+    getLocalized(a.label).localeCompare(getLocalized(b.label))
+  );
   return data;
 };
 

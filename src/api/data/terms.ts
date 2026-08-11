@@ -9,7 +9,10 @@ import { HIDDEN_VOCABULARY } from "./vocabularies";
 
 const RelationItemSchema = {
   "@type": skos.Concept,
-  label: skos.prefLabel,
+  label: {
+    "@id": skos.prefLabel,
+    "@multilang": true,
+  },
   vocabulary: {
     "@id": popisDat["je-pojmem-ze-slovníku"],
     "@schema": {
@@ -28,7 +31,10 @@ export const TermBaseSchema = {
     "@id": rdf.type,
     "@array": true,
   },
-  label: skos.prefLabel,
+  label: {
+    "@id": skos.prefLabel,
+    "@multilang": true,
+  },
   vocabulary: {
     "@id": popisDat["je-pojmem-ze-slovníku"],
     "@schema": {
@@ -41,6 +47,7 @@ export const TermBaseSchema = {
   },
   definition: {
     "@id": skos.definition,
+    "@multilang": true,
     "@optional": true,
   },
   notation: {
@@ -56,6 +63,7 @@ const TermSchema = {
     "@id": skos.altLabel,
     "@optional": true,
     "@array": true,
+    "@multilang": true,
   },
   source: {
     "@id": dcterms.source,

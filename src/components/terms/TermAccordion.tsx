@@ -10,6 +10,7 @@ import AccordionDescription from "./AccordionDescription";
 import HierarchyItem from "./HierarchyItem";
 import { generateTermRoute } from "../../utils/Utils";
 import { TermBaseInterface } from "../../api/data/terms";
+import { getLocalized } from "../../utils/LabelUtils";
 
 //TODO: Remove withStyles -> do styled() instead
 //For now it doesn't behave as expected with styled()
@@ -82,7 +83,7 @@ export const TermAccordion: React.FC<TermAccordionProps> = (props) => {
           <Box>
             {props.showVocabulary && (
               <Typography variant="body2" color="textSecondary">
-                {props.term.vocabulary.label}
+                {getLocalized(props.term.vocabulary.label)}
               </Typography>
             )}
             <FormControl
@@ -90,7 +91,7 @@ export const TermAccordion: React.FC<TermAccordionProps> = (props) => {
               onFocus={(event) => event.stopPropagation()}
             >
               <RouteLink to={routeProps} variant="h6" color="textSecondary">
-                {props.term.label}
+                {getLocalized(props.term.label)}
               </RouteLink>
             </FormControl>
           </Box>
