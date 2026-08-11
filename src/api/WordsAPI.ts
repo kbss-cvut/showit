@@ -7,6 +7,7 @@ import {
   VocabularySearchResource,
 } from "./data/search";
 import { skos } from "ldkit/namespaces";
+import { popisDat } from "./data/namespaces";
 
 const getSearchResults = async (word: string | undefined) => {
   if (!word) {
@@ -24,7 +25,10 @@ const getSearchResults = async (word: string | undefined) => {
     .groupBy("label")
     .map((objs, key) => {
       return {
-        type: objs.length === 1 ? objs[0].$type : [skos.Collection],
+        type:
+          objs.length === 1
+            ? ([skos.Concept] as string[])
+            : ([skos.Collection] as string[]),
         label: key,
         // include text with highlighted search string, should be the same for all objects with the same label
         displayText:
@@ -49,7 +53,7 @@ const getSearchResults = async (word: string | undefined) => {
   const result2 = _(vocabularyData)
     .map((item) => {
       return {
-        type: item.$type,
+        type: [popisDat["slovník"]] as string[],
         label: item.label,
         displayText: item.snippetText,
         total_score: item.score,

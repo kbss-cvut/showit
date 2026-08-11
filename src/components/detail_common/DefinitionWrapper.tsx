@@ -11,8 +11,8 @@ import {
 import { isValidHttpUrl } from "../../utils/TermUtils";
 
 interface DefinitionWrapperProps {
-  definition?: string;
-  source?: string;
+  definition?: string | null;
+  source?: string | null;
   illustration: ReactElement;
 }
 
@@ -67,7 +67,7 @@ const DefinitionWrapper: React.FC<DefinitionWrapperProps & BoxProps> = (
 };
 
 interface DefinitionSourceProps {
-  definitionSource?: string;
+  definitionSource?: string | null;
 }
 
 const DefinitionSource: React.FC<DefinitionSourceProps> = ({

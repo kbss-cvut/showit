@@ -11,6 +11,11 @@
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "ldkit": ["node_modules/ldkit/esm/mod.d.ts"],
+      "ldkit/*": ["node_modules/ldkit/esm/*"]
+    },
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
