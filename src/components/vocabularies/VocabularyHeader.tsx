@@ -3,6 +3,8 @@ import { Typography } from "@mui/material";
 import DetailPageHeader from "../detail_common/DetailPageHeader";
 import { useVocabularyTerms } from "../../api/VocabularyAPI";
 import { VocabularyInterface } from "../../api/data/vocabularies";
+import { useLanguage } from "../../context/LanguageContext";
+import { getLocalized } from "../../utils/IntlUtils";
 
 const countHelper = (length: number) => {
   if (length === 1) return "pojem";
@@ -18,6 +20,7 @@ const VocabularyHeader: React.FC<DetailVocabularyHeaderProps> = ({
   vocabulary,
 }) => {
   const { data = [], isLoading } = useVocabularyTerms(vocabulary.$id);
+  const { language } = useLanguage();
   const above = (
     <Typography variant="h5" color="textSecondary">
       {isLoading
@@ -29,8 +32,10 @@ const VocabularyHeader: React.FC<DetailVocabularyHeaderProps> = ({
   return (
     <DetailPageHeader
       aboveLabel={above}
-      label={vocabulary.label}
+      label={getLocalized(vocabulary.label, language)}
       iri={vocabulary.$id}
+      multilingualAttributes={["label"]}
+      asset={vocabulary}
     />
   );
 };

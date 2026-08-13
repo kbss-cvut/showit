@@ -4,7 +4,7 @@ import { RelationTermResult } from "../../api/TermAPI";
 import { TermBaseInterface } from "../../api/data/terms";
 import RouteLink from "../RouteLink";
 import { generateTermRoute } from "../../utils/Utils";
-import { getLocalized } from "../../utils/LabelUtils";
+import { getLocalized } from "../../utils/IntlUtils";
 
 const StyledTerm = styled(Paper, {
   shouldForwardProp: (prop) => prop !== "current",

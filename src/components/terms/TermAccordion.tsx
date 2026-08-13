@@ -10,7 +10,7 @@ import AccordionDescription from "./AccordionDescription";
 import HierarchyItem from "./HierarchyItem";
 import { generateTermRoute } from "../../utils/Utils";
 import { TermBaseInterface } from "../../api/data/terms";
-import { getLocalized } from "../../utils/LabelUtils";
+import { getLocalized } from "../../utils/IntlUtils";
 
 //TODO: Remove withStyles -> do styled() instead
 //For now it doesn't behave as expected with styled()

@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography } from "@mui/material";
 import { TermBaseInterface } from "../../api/data/terms";
-import { getLocalized } from "../../utils/LabelUtils";
+import { getLocalized } from "../../utils/IntlUtils";
 
 interface AccordionDescriptionProps {
   term: TermBaseInterface;
