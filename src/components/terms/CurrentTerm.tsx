@@ -3,6 +3,7 @@ import HierarchyItem from "./HierarchyItem";
 import { Box, Paper, styled, Typography } from "@mui/material";
 import { TermAccordionProps } from "./TermAccordion";
 import { getLocalized } from "../../utils/IntlUtils";
+import { useLanguage } from "../../context/LanguageContext";
 
 const CurrentTermBox = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
@@ -17,6 +18,7 @@ const CurrentTermBox = styled(Paper)(({ theme }) => ({
 }));
 
 const CurrentTerm: React.FC<TermAccordionProps> = (props) => {
+  const { language } = useLanguage();
   return (
     <HierarchyItem level={props.level} connector={props.connector}>
       <Box
@@ -27,7 +29,7 @@ const CurrentTerm: React.FC<TermAccordionProps> = (props) => {
       >
         <CurrentTermBox square elevation={0}>
           <Typography variant="h6" color="textSecondary">
-            {getLocalized(props.term.label)}
+            {getLocalized(props.term.label, language)}
           </Typography>
         </CurrentTermBox>
       </Box>
