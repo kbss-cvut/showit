@@ -5,8 +5,9 @@ import DetailPageHeader from "../detail_common/DetailPageHeader";
 import RouteLink from "../RouteLink";
 import { generateVocabularyRoute } from "../../utils/Utils";
 import { TermInterface } from "../../api/data/terms";
-import { getLocalized } from "../../utils/LabelUtils";
+import { getLocalized } from "../../utils/IntlUtils";
 import { Notations } from "./Notations";
+import { useLanguage } from "../../context/LanguageContext";
 
 export interface DetailHeaderProps {
   term: TermInterface;
@@ -14,11 +15,12 @@ export interface DetailHeaderProps {
 
 const TermHeader: React.FC<DetailHeaderProps> = ({ term }) => {
   const { $id, label, altLabels, notation, vocabulary } = term;
+  const { language } = useLanguage();
 
   const vocabularyRoute = generateVocabularyRoute(vocabulary.$id);
   const above = (
     <RouteLink to={vocabularyRoute} variant="h5" color="textSecondary">
-      {getLocalized(vocabulary.label) || vocabulary.$id}
+      {getLocalized(vocabulary.label, language) || vocabulary.$id}
     </RouteLink>
   );
   const below = <AltLabel altLabels={altLabels} />;
@@ -26,13 +28,13 @@ const TermHeader: React.FC<DetailHeaderProps> = ({ term }) => {
   const title =
     notation.length > 0 ? (
       <>
-        {getLocalized(label)}
+        {getLocalized(label, language)}
         <Box component="span" sx={{ marginLeft: "0.25rem" }}>
           <Notations notation={notation} />
         </Box>
       </>
     ) : (
-      getLocalized(label)
+      getLocalized(label, language)
     );
 
   return (
@@ -41,6 +43,8 @@ const TermHeader: React.FC<DetailHeaderProps> = ({ term }) => {
       label={title}
       belowLabel={below}
       iri={$id}
+      multilingualAttributes={["label", "definition", "altLabels"]}
+      asset={term}
     />
   );
 };

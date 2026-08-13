@@ -9,6 +9,7 @@ import VocabularyDefinition from "./VocabularyDefinition";
 import VocabularyTerms from "./VocabularyTerms";
 import ErrorPage from "../ErrorPage";
 import useRouteQuery from "../../hooks/useRouteQuery";
+import { LanguageProvider } from "../../context/LanguageContext";
 
 const VocabularyPage: React.FC = () => {
   const routeQuery = useRouteQuery();
@@ -26,11 +27,13 @@ const VocabularyPage: React.FC = () => {
 
   if (vIsSuccess && isSuccess) {
     return (
-      <Box mb={2}>
-        <VocabularyHeader vocabulary={data} />
-        <VocabularyDefinition description={data.description} />
-        <VocabularyTerms vocabularyIri={data.$id} />
-      </Box>
+      <LanguageProvider>
+        <Box mb={2}>
+          <VocabularyHeader vocabulary={data} />
+          <VocabularyDefinition description={data.description} />
+          <VocabularyTerms vocabularyIri={data.$id} />
+        </Box>
+      </LanguageProvider>
     );
   }
   return <NoResults />;

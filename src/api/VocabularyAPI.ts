@@ -1,11 +1,12 @@
 import { useQuery } from "react-query";
-import { getLocalized } from "../utils/LabelUtils";
+import { getLocalized } from "../utils/IntlUtils";
 import {
   getVocabularyTermsQuery,
   HIDDEN_VOCABULARY,
   Vocabularies,
   VocabularyTerms,
 } from "./data/vocabularies";
+import { popisDat } from "./data/namespaces";
 
 export const getVocabulary = async (vocabularyIri: string) => {
   //If user is trying to fetch hidden vocabulary, immediately return null -> no retries from React Query
@@ -28,8 +29,12 @@ export const getAllVocabularies = async () => {
   }
   //Z-GOV should not be visible
   return data
-    .filter((vocabulary) => vocabulary.$id !== HIDDEN_VOCABULARY)
-    .sort((a, b) => a.label.localeCompare(b.label));
+    .filter(
+      (vocabulary) =>
+        vocabulary.$id !== HIDDEN_VOCABULARY &&
+        !vocabulary.$type.includes(popisDat["verze-objektu"])
+    )
+    .sort((a, b) => getLocalized(a.label).localeCompare(getLocalized(b.label)));
 };
 
 export const useVocabulary = (vocabularyUri: string) => {

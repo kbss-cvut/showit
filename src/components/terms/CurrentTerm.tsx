@@ -2,7 +2,7 @@ import React from "react";
 import HierarchyItem from "./HierarchyItem";
 import { Box, Paper, styled, Typography } from "@mui/material";
 import { TermAccordionProps } from "./TermAccordion";
-import { getLocalized } from "../../utils/LabelUtils";
+import { getLocalized } from "../../utils/IntlUtils";
 
 const CurrentTermBox = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,

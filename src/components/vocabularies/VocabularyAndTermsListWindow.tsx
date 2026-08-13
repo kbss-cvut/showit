@@ -4,7 +4,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { ReactWindowScroller } from "../../utils/ReactWindowScroller";
 import makeStyles from "@mui/styles/makeStyles";
 import { DetailItemWrapper } from "../terms/Hierarchy";
-import { getLocalized, MultilingualString } from "../../utils/LabelUtils";
+import { getLocalized, MultilingualString } from "../../utils/IntlUtils";
 import { Box, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 

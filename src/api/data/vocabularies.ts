@@ -22,6 +22,7 @@ const VocabularySchema = {
   },
   label: {
     "@id": dcterms.title,
+    "@multilang": true,
   },
   description: {
     "@id": dcterms.description,
