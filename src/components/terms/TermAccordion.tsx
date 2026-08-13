@@ -11,6 +11,7 @@ import HierarchyItem from "./HierarchyItem";
 import { generateTermRoute } from "../../utils/Utils";
 import { TermBaseInterface } from "../../api/data/terms";
 import { getLocalized } from "../../utils/IntlUtils";
+import { useLanguage } from "../../context/LanguageContext";
 
 //TODO: Remove withStyles -> do styled() instead
 //For now it doesn't behave as expected with styled()
@@ -72,6 +73,7 @@ export interface TermAccordionProps {
 export const TermAccordion: React.FC<TermAccordionProps> = (props) => {
   const [expanded, setExpanded] = useState(false);
   const routeProps = generateTermRoute(props.term);
+  const { language } = useLanguage();
   return (
     <HierarchyItem level={props.level} connector={props.connector}>
       <Accordion
@@ -91,7 +93,7 @@ export const TermAccordion: React.FC<TermAccordionProps> = (props) => {
               onFocus={(event) => event.stopPropagation()}
             >
               <RouteLink to={routeProps} variant="h6" color="textSecondary">
-                {getLocalized(props.term.label)}
+                {getLocalized(props.term.label, language)}
               </RouteLink>
             </FormControl>
           </Box>

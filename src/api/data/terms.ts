@@ -42,6 +42,7 @@ export const TermBaseSchema = {
       label: {
         "@id": dcterms.title,
         "@optional": true,
+        "@multilang": true,
       },
     },
   },

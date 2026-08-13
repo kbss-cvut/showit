@@ -5,6 +5,7 @@ import { TermBaseInterface } from "../../api/data/terms";
 import RouteLink from "../RouteLink";
 import { generateTermRoute } from "../../utils/Utils";
 import { getLocalized } from "../../utils/IntlUtils";
+import { useLanguage } from "../../context/LanguageContext";
 
 const StyledTerm = styled(Paper, {
   shouldForwardProp: (prop) => prop !== "current",
@@ -42,6 +43,7 @@ export const RelationItem: React.FC<RelationTermProps> = ({
   showVocabulary,
 }) => {
   const routeProps = generateTermRoute(data);
+  const { language } = useLanguage();
   return (
     <Box flex={1} display={"flex"}>
       <Box flex={2}>
@@ -49,11 +51,11 @@ export const RelationItem: React.FC<RelationTermProps> = ({
           <StyledTerm current={false} square elevation={0}>
             {showVocabulary && (
               <Typography variant="body2" color="textSecondary">
-                {getLocalized(data.vocabulary.label)}
+                {getLocalized(data.vocabulary.label, language)}
               </Typography>
             )}
             <RouteLink to={routeProps} variant="h6" color="textSecondary">
-              {getLocalized(data.label)}
+              {getLocalized(data.label, language)}
             </RouteLink>
           </StyledTerm>
         </BoxWrapper>
@@ -68,11 +70,12 @@ interface CurrentRelationTermProps {
 export const CurrentRelationTerm: React.FC<CurrentRelationTermProps> = ({
   data,
 }) => {
+  const { language } = useLanguage();
   return (
     <BoxWrapper current={true} flex={1}>
       <StyledTerm current={true} square elevation={0}>
         <Typography variant="h6" color="textSecondary">
-          {getLocalized(data.label)}
+          {getLocalized(data.label, language)}
         </Typography>
       </StyledTerm>
     </BoxWrapper>

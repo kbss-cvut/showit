@@ -7,6 +7,7 @@ import { DetailItemWrapper } from "../terms/Hierarchy";
 import { getLocalized, MultilingualString } from "../../utils/IntlUtils";
 import { Box, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useLanguage } from "../../context/LanguageContext";
 
 //Unfortunately the makeStyles performs better than styled
 //Even though makeStyles is considered legacy, I would leave it here for now
@@ -86,6 +87,7 @@ const VocabularyAndTermsListWindow: React.FC<VocabularyAndTermsListProps> = ({
 }) => {
   const classes = useStyles();
   const [filterText, setFilterText] = useState("");
+  const { language } = useLanguage();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilterText(event.target.value);
   };
@@ -94,7 +96,7 @@ const VocabularyAndTermsListWindow: React.FC<VocabularyAndTermsListProps> = ({
       .filter((term) => {
         if (filterText === "") return true;
         else {
-          return getLocalized(term.label)
+          return getLocalized(term.label, language)
             .toLowerCase()
             .includes(filterText.toLowerCase());
         }
@@ -103,10 +105,13 @@ const VocabularyAndTermsListWindow: React.FC<VocabularyAndTermsListProps> = ({
         return {
           $id: term.$id,
           $type: term.$type,
-          label: getHighlightedText(getLocalized(term.label), filterText),
+          label: getHighlightedText(
+            getLocalized(term.label, language),
+            filterText
+          ),
         };
       });
-  }, [data, filterText]);
+  }, [data, filterText, language]);
 
   const filter = (
     <Box ml={4}>
