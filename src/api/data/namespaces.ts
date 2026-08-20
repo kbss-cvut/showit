@@ -1,9 +1,9 @@
 import { createNamespace } from "ldkit";
 
-export const popisDat = createNamespace({
-  iri: "http://onto.fel.cvut.cz/ontologies/slovník/agendový/popis-dat/pojem/",
-  prefix: "popisdat:",
-  terms: ["je-pojmem-ze-slovníku", "slovník", "verze-objektu"],
+export const dataDescription = createNamespace({
+  iri: "http://onto.fel.cvut.cz/ontologies/data-description/",
+  prefix: "dd:",
+  terms: ["version-of-object"],
 } as const);
 
 export const lucene = createNamespace({

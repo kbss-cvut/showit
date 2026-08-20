@@ -1,7 +1,6 @@
 import { SearchTerm } from "../api/WordsAPI";
 import { skos } from "ldkit/namespaces";
 import { generateTermRoute, generateVocabularyRoute } from "./Utils";
-import { popisDat } from "../api/data/namespaces";
 
 export const generateRoute = (item: {
   type: string[];
@@ -12,7 +11,7 @@ export const generateRoute = (item: {
   if (item.type.includes(skos.Concept)) return generateTermRoute(item.items[0]);
   if (item.type.includes(skos.Collection))
     return `/rozcestnik?label=${item.label}`;
-  if (item.type.includes(popisDat["slovník"]))
+  if (item.type.includes(skos.ConceptScheme))
     return generateVocabularyRoute(item.vocabularies["id"]);
   return "/error";
 };

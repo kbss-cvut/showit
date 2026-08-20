@@ -6,7 +6,7 @@ import {
   Vocabularies,
   VocabularyTerms,
 } from "./data/vocabularies";
-import { popisDat } from "./data/namespaces";
+import { dataDescription } from "./data/namespaces";
 
 export const getVocabulary = async (vocabularyIri: string) => {
   //If user is trying to fetch hidden vocabulary, immediately return null -> no retries from React Query
@@ -32,7 +32,7 @@ export const getAllVocabularies = async () => {
     .filter(
       (vocabulary) =>
         vocabulary.$id !== HIDDEN_VOCABULARY &&
-        !vocabulary.$type.includes(popisDat["verze-objektu"])
+        !vocabulary.$type.includes(dataDescription["version-of-object"])
     )
     .sort((a, b) => getLocalized(a.label).localeCompare(getLocalized(b.label)));
 };

@@ -5,10 +5,10 @@ import SearchCard from "./SearchCard";
 import theme from "../../app/theme";
 import { SearchResult } from "../../api/WordsAPI";
 import { generateStyledSnippet } from "../../utils/TermUtils";
-import { popisDat } from "../../api/data/namespaces";
 import TypeIcon from "../TypeIcon";
 import { generateRoute } from "../../utils/SearchUtil";
 import MaxLineText from "../MaxLineText";
+import { skos } from "ldkit/namespaces";
 
 const HighlightedText = styled(Typography)(({ theme }) => ({
   "--fontsize": "1.6982rem",
@@ -56,7 +56,7 @@ const SearchResultView: React.FC<SearchResult> = ({
   });
   if (routeProps === "/error") return null;
 
-  const border = type.includes(popisDat["slovník"])
+  const border = type.includes(skos.ConceptScheme)
     ? theme.palette.secondary.main
     : theme.palette.primary.main;
   return (
@@ -65,7 +65,7 @@ const SearchResultView: React.FC<SearchResult> = ({
         <SearchCard borderColor={`${border} !important`}>
           <Box display="flex">
             <TypeIcon type={type} width={17} height={20} />
-            {type.includes(popisDat["slovník"]) ? (
+            {type.includes(skos.ConceptScheme) ? (
               <MaxLineText
                 variant="h4"
                 maxlines={3}
@@ -98,7 +98,7 @@ const SearchResultView: React.FC<SearchResult> = ({
           )}
           {
             //If result is not vocabulary show associated vocabularies of the result
-            !type.includes(popisDat["slovník"]) &&
+            !type.includes(skos.ConceptScheme) &&
               Object.keys(vocabularies).map((vocabularyUri) => {
                 return (
                   <Box mt={1} key={vocabularyUri}>

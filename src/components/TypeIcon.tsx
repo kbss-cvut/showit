@@ -2,7 +2,6 @@ import React from "react";
 import { skos } from "ldkit/namespaces";
 import { ReactComponent as TermIcon } from "../assets/article.svg";
 import { ReactComponent as WordIcon } from "../assets/split.svg";
-import { popisDat } from "../api/data/namespaces";
 import { ReactComponent as VocabularyIcon } from "../assets/book.svg";
 import { Box } from "@mui/material";
 
@@ -24,12 +23,12 @@ const TypeIcon: React.FC<TypeIconProps> = ({ type, width, height }) => {
   if (type.includes(skos.Concept))
     icon = <TermIcon fill="white" style={iconStyle} />;
   if (type.includes(skos.Collection)) icon = <WordIcon style={iconStyle} />;
-  if (type.includes(popisDat["slovník"]))
+  if (type.includes(skos.ConceptScheme))
     icon = <VocabularyIcon fill="white" style={iconStyle} />;
   return (
     <Box
       bgcolor={
-        type.includes(popisDat["slovník"]) ? "secondary.main" : "primary.main"
+        type.includes(skos.ConceptScheme) ? "secondary.main" : "primary.main"
       }
       borderRadius={1}
       display="flex"

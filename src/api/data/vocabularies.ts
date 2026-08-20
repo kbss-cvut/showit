@@ -1,9 +1,8 @@
 import { createLens, type SchemaInterface } from "ldkit";
-import { dcterms, rdf, skos, ldkit } from "ldkit/namespaces";
+import { dcterms, ldkit, rdf, skos } from "ldkit/namespaces";
 import { sparql } from "ldkit/sparql";
 
 import { options } from "./context";
-import { popisDat } from "./namespaces";
 import { n } from "./utils";
 import { TermBaseSchema } from "./terms";
 
@@ -15,7 +14,7 @@ const VocabularyTermSchema = {
 } as const;
 
 const VocabularySchema = {
-  "@type": popisDat["slovník"],
+  "@type": skos.ConceptScheme,
   $type: {
     "@id": rdf.type,
     "@array": true,
@@ -49,7 +48,7 @@ export const getVocabularyTermsQuery = (vocabularyIri: string) => {
   }
   WHERE {
     ?iri a ${n(skos.Concept)} ;
-      ${n(popisDat["je-pojmem-ze-slovníku"])} ${n(vocabularyIri)} ;
+      ${n(skos.inScheme)} ${n(vocabularyIri)} ;
       ${n(skos.prefLabel)} ?label .
     OPTIONAL { ?iri ${n(skos.definition)} ?definition . }
   }

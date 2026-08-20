@@ -7,7 +7,6 @@ import {
   VocabularySearchResource,
 } from "./data/search";
 import { skos } from "ldkit/namespaces";
-import { popisDat } from "./data/namespaces";
 
 const getSearchResults = async (word: string | undefined) => {
   if (!word) {
@@ -53,7 +52,7 @@ const getSearchResults = async (word: string | undefined) => {
   const result2 = _(vocabularyData)
     .map((item) => {
       return {
-        type: [popisDat["slovník"]] as string[],
+        type: [skos.ConceptScheme] as string[],
         label: item.label,
         displayText: item.snippetText,
         total_score: item.score,

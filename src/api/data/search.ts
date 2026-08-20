@@ -1,13 +1,13 @@
 import { createLens, type SchemaInterface } from "ldkit";
 import { xsd, skos, dcterms, ldkit } from "ldkit/namespaces";
 import { sparql } from "ldkit/sparql";
-import { lucene, luceneInstance, popisDat } from "./namespaces";
+import { lucene, luceneInstance, dataDescription } from "./namespaces";
 import { n, l } from "./utils";
 import { options } from "./context";
 import { HIDDEN_VOCABULARY } from "./vocabularies";
 
 const VocabularySchema = {
-  "@type": popisDat["slovník"],
+  "@type": skos.ConceptScheme,
   title: dcterms.title,
 };
 
@@ -19,7 +19,7 @@ const SearchSchema = {
     "@optional": true,
   },
   vocabulary: {
-    "@id": popisDat["je-pojmem-ze-slovníku"],
+    "@id": skos.inScheme,
     "@schema": VocabularySchema,
   },
   snippetField: lucene.snippetField,
@@ -31,7 +31,7 @@ const SearchSchema = {
 } as const;
 
 const VocabularySearchSchema = {
-  "@type": popisDat["slovník"],
+  "@type": skos.ConceptScheme,
   label: {
     "@id": dcterms.title,
   },
@@ -81,7 +81,7 @@ CONSTRUCT {
   ?entity a ${n(skos.Concept)} , ${n(ldkit.Resource)} ;
           ${n(skos.prefLabel)} ?label ;
           ${n(skos.definition)} ?definition ;
-          ${n(popisDat["je-pojmem-ze-slovníku"])} ?vocabulary ;
+          ${n(skos.inScheme)} ?vocabulary ;
           ${n(lucene.snippetText)} ?snippetText ;
           ${n(lucene.snippetField)} ?snippetField ;
           ${n(lucene.score)} ?score .
@@ -98,7 +98,7 @@ CONSTRUCT {
       ?entity a ${n(skos.Concept)} ;
               ${n(skos.prefLabel)} ?label .
     }
-    ?entity ${n(popisDat["je-pojmem-ze-slovníku"])} ?vocabulary .
+    ?entity ${n(skos.inScheme)} ?vocabulary .
     ?vocabulary ${n(dcterms.title)} ?vocabularyTitle .
     OPTIONAL { ?entity ${n(skos.definition)} ?definition . }
     ?entity ${n(lucene.score)} ?initScore ;
@@ -107,7 +107,7 @@ CONSTRUCT {
         ${n(lucene.snippetField)} ?snippetField .
     FILTER (lang(?label) = "cs")
     FILTER (?vocabulary != ${n(HIDDEN_VOCABULARY)})
-    FILTER NOT EXISTS { ?entity a ${n(popisDat["verze-objektu"])} }
+    FILTER NOT EXISTS { ?entity a ${n(dataDescription["version-of-object"])} }
     BIND(IF(lcase(str(?snippetText)) = lcase(str(${l(
       exactMatchString
     )})), ?initScore * 2, IF(CONTAINS(lcase(str(?snippetText)), ${l(
@@ -135,7 +135,7 @@ export const getVocabularySearchQuery = (text: string) => {
 
   const query = sparql`
 CONSTRUCT {
-  ?entity a ${n(popisDat["slovník"])} , ${n(ldkit.Resource)} ;
+  ?entity a ${n(skos.ConceptScheme)} , ${n(ldkit.Resource)} ;
           ${n(dcterms.title)} ?label ;
           ${n(dcterms.description)} ?definition ;
           ${n(lucene.snippetText)} ?snippetText ;
@@ -150,7 +150,7 @@ CONSTRUCT {
             ${n(lucene.snippetSize)} 2000 ;
             ${n(lucene.entities)} ?entity . 
     GRAPH ?g {
-      ?entity a ${n(popisDat["slovník"])} ;
+      ?entity a ${n(skos.ConceptScheme)} ;
               ${n(dcterms.title)} ?label .
     }
     OPTIONAL { ?entity ${n(dcterms.description)} ?definition . }
@@ -160,7 +160,7 @@ CONSTRUCT {
         ${n(lucene.snippetField)} ?snippetField .
     FILTER (lang(?label) = "cs")
     FILTER (?entity != ${n(HIDDEN_VOCABULARY)})
-    FILTER NOT EXISTS { ?entity a ${n(popisDat["verze-objektu"])} }
+    FILTER NOT EXISTS { ?entity a ${n(dataDescription["version-of-object"])} }
     BIND(IF(lcase(str(?snippetText)) = lcase(str(${l(
       exactMatchString
     )})), ?initScore * 2, IF(CONTAINS(lcase(str(?snippetText)), ${l(
