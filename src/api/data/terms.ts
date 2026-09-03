@@ -51,6 +51,11 @@ export const TermBaseSchema = {
     "@multilang": true,
     "@optional": true,
   },
+  scopeNote: {
+    "@id": skos.scopeNote,
+    "@multilang": true,
+    "@optional": true,
+  },
   notation: {
     "@id": skos.notation,
     "@optional": true,

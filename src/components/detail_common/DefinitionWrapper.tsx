@@ -5,13 +5,16 @@ import {
   Container,
   Grid,
   Link,
+  Stack,
   styled,
   Typography,
 } from "@mui/material";
 import { isValidHttpUrl } from "../../utils/TermUtils";
+import { Comment } from "@mui/icons-material";
 
 interface DefinitionWrapperProps {
   definition?: string | null;
+  scopeNote?: string | null;
   source?: string | null;
   illustration: ReactElement;
 }
@@ -51,9 +54,20 @@ const DefinitionWrapper: React.FC<DefinitionWrapperProps & BoxProps> = (
               flexDirection="column"
               justifyContent="center"
             >
-              <Box mb={props.source ? 2 : 0}>
+              <Box mb={props.source || props.scopeNote ? 2 : 0}>
                 <Typography variant="h6">{props.definition}</Typography>
               </Box>
+              {props.scopeNote && (
+                <Box mb={props.source ? 2 : 0}>
+                  <Stack direction="row" gap={1}>
+                    <Comment />
+                    <Typography variant="body1" fontWeight={600}>
+                      Pozn.:
+                    </Typography>
+                    <Typography variant="body1">{props.scopeNote}</Typography>
+                  </Stack>
+                </Box>
+              )}
               <DefinitionSource definitionSource={props.source} />
             </Box>
           </Grid>

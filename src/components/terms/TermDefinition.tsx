@@ -26,6 +26,7 @@ const TermDefinition: React.FC<DefinitionProps> = ({ term }) => {
     <DefinitionWrapper
       illustration={illustration}
       definition={getLocalized(term.definition, language)}
+      scopeNote={getLocalized(term.scopeNote, language)}
       source={term.source}
     />
   );
