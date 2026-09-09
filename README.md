@@ -15,7 +15,7 @@ The application is built with **Vite** and **TypeScript**, styled with
 
 ## Development Requirements
 
-Requires **Node.js 16+** and **npm**.
+Requires **Node.js 22+** and **npm**.
 
 ## Configuration
 
