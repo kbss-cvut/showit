@@ -8,6 +8,7 @@ export default defineConfig({
       jsxImportSource: "@emotion/react",
     }),
     svgr({
+      include: "**/*.svg",
       svgrOptions: {
         exportType: "named",
         namedExport: "ReactComponent",
