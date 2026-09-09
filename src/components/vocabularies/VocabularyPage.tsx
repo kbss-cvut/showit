@@ -36,7 +36,7 @@ const VocabularyPage: React.FC = () => {
           <VocabularyTerms vocabularyIri={data.$id} />
         </Box>
         {plugins.map(({ id, Component }) => (
-          <Component key={id} />
+          <Component key={id} data={data} />
         ))}
       </LanguageProvider>
     );

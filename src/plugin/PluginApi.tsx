@@ -3,7 +3,7 @@ import React from "react";
 export type View = "TermDetail" | "VocabularyDetail" | "VocabularyList" | "App";
 
 export interface PluginMetadata {
-  id?: string;
+  id: string;
   name?: string;
   view: View;
 }
