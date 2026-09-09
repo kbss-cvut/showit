@@ -10,7 +10,7 @@ It connects to a SPARQL endpoint and lets users search, list, and explore
 vocabularies (`slovníky`) and individual terms (`pojmy`) with their definitions,
 hierarchies, and semantic relations.
 
-The application is built with **Create React App** and **TypeScript**, styled with
+The application is built with **Vite** and **TypeScript**, styled with
 **Material UI (MUI)**.
 
 ## Development Requirements
@@ -21,10 +21,10 @@ Requires **Node.js 16+** and **npm**.
 
 The application reads configuration from two sources:
 
-1. **Build-time environment variables** prefixed with `REACT_APP_`:
+1. **Build-time environment variables** prefixed with `VITE_`:
 
    | Variable          | Purpose                                 | Example                                     |
-   |-------------------|-----------------------------------------|---------------------------------------------|
+   | ----------------- | --------------------------------------- | ------------------------------------------- |
    | `SPARQL_ENDPOINT` | SPARQL endpoint for ldkit queries       | `http://localhost:7200/repositories/termit` |
    | `SUGGESTED_WORDS` | Comma-separated list of suggested words | `Délka,Lokalita,Dokumentace,Demolice`       |
    | `APP_CONTEXT`     | Base URL path of the application        | `/prohlizime`                               |

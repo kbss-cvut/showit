@@ -1,8 +1,8 @@
 {
   "name": "showit",
   "version": "0.4.0",
-  "homepage": ".",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
@@ -16,42 +16,26 @@
     "react-dom": "^17.0.2",
     "react-query": "^3.21.1",
     "react-router-dom": "^5.3.4",
-    "react-scripts": "5.0.1",
     "react-spinners": "^0.17.0",
     "react-window": "^1.8.6",
     "typescript": "^4.4.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run --passWithNoTests",
     "prettier:check": "prettier --check ./src",
     "prettier:fix": "prettier --write ./src",
     "prepare": "husky"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all",
-      "not IE 11"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
     "@types/lodash": "^4.14.172",
-    "@types/node": "^12.20.19",
+    "@types/node": "^16.0.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^4.5.9",
+    "vite-plugin-svgr": "^3.3.0",
+    "vitest": "^0.34.6",
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.1.8",
