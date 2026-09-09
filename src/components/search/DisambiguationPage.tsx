@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useRouteQuery from "../../hooks/useRouteQuery";
 import { useSearch, SearchResult, SearchTerm } from "../../api/WordsAPI";
-import { find } from "lodash";
+import find from "lodash/find";
 import { Box, Container, Typography } from "@mui/material";
 import TermResult from "../terms/TermResult";
 import Loader from "../Loader";

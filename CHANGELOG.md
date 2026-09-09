@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented in this file.
 
+## [Unreleased]
+
+- Migrate build tooling from Create React App to Vite 8.
+- Rename build-time env variable prefix from `REACT_APP_` to `VITE_`.
+
 ## [0.4.0] - 2026-09-03
 
 - Include scopeNote in term detail.

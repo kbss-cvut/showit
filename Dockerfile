@@ -8,8 +8,7 @@ COPY package.json package-lock.json ./
 # Install production and dev dependencies
 FROM base AS dependencies
 # install node packages
-RUN npm set progress=false && npm config set depth 0
-RUN npm install
+RUN npm ci --ignore-scripts
 
 # BUILD STAGE
 # run NPM build
@@ -20,7 +19,7 @@ RUN set -ex; \
 
 # RELEASE STAGE
 # Only include the static files in the final image
-FROM nginx:1.31.1-alpine
+FROM nginx:alpine
 COPY --from=build /usr/src/app/build/ /usr/share/nginx/html/
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 # Make env var substitution happen on *.template files in the html dir
