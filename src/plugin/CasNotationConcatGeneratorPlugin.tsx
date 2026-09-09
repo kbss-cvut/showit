@@ -1,6 +1,18 @@
 import React from "react";
-import { Box, Button, Paper, Stack, Typography } from "@mui/material";
-import { Add as AddIcon, Cancel as CancelIcon } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Fab,
+  Paper,
+  Stack,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import {
+  Add as AddIcon,
+  Cancel as CancelIcon,
+  Replay as ResetIcon,
+} from "@mui/icons-material";
 import { TermInterface } from "../api/data/terms";
 import { PluginMetadata } from "./PluginApi";
 import { getLocalized } from "../utils/IntlUtils";
@@ -9,6 +21,7 @@ import { useLanguage } from "../context/LanguageContext";
 const initialState = {
   notation: "",
   label: "",
+  isOpen: false,
 };
 let storedState = { ...initialState };
 
@@ -18,6 +31,7 @@ const CasNotationConcatGeneratorPlugin: React.FC<{ data: TermInterface }> = ({
   const { language } = useLanguage();
   const [notation, setNotation] = React.useState(storedState.notation);
   const [label, setLabel] = React.useState(storedState.label);
+  const [isOpen, setIsOpen] = React.useState(storedState.isOpen ?? true);
   const onAdd = () => {
     const newLabel =
       label +
@@ -29,6 +43,7 @@ const CasNotationConcatGeneratorPlugin: React.FC<{ data: TermInterface }> = ({
     setLabel(newLabel);
     setNotation(newNotation);
     storedState = {
+      ...storedState,
       label: newLabel,
       notation: newNotation,
     };
@@ -36,8 +51,36 @@ const CasNotationConcatGeneratorPlugin: React.FC<{ data: TermInterface }> = ({
   const onReset = () => {
     setNotation("");
     setLabel("");
-    storedState = { ...initialState };
+    storedState = { ...initialState, isOpen };
   };
+  const onClose = () => {
+    setIsOpen(false);
+    storedState = { ...storedState, isOpen: false };
+  };
+  const onReopen = () => {
+    setIsOpen(true);
+    storedState = { ...storedState, isOpen: true };
+  };
+
+  if (!isOpen) {
+    return (
+      <Tooltip title="Otevřít generátor notačních kódů">
+        <Fab
+          onClick={onReopen}
+          color="primary"
+          size="medium"
+          sx={{
+            position: "fixed",
+            bottom: 16,
+            right: 16,
+            zIndex: (theme) => theme.zIndex.tooltip,
+          }}
+        >
+          <AddIcon />
+        </Fab>
+      </Tooltip>
+    );
+  }
 
   return (
     <Paper
@@ -64,12 +107,21 @@ const CasNotationConcatGeneratorPlugin: React.FC<{ data: TermInterface }> = ({
         >
           <Typography variant="h6">Generátor notačních kódů</Typography>
           <Box>
-            <Button onClick={onAdd} color="primary">
-              <AddIcon />
-            </Button>
-            <Button onClick={onReset} color="secondary">
-              <CancelIcon />
-            </Button>
+            <Tooltip title="Přidat pojem">
+              <Button onClick={onAdd} color="primary">
+                <AddIcon />
+              </Button>
+            </Tooltip>
+            <Tooltip title="Resetovat">
+              <Button onClick={onReset}>
+                <ResetIcon />
+              </Button>
+            </Tooltip>
+            <Tooltip title="Zavřít">
+              <Button onClick={onClose} color="secondary">
+                <CancelIcon />
+              </Button>
+            </Tooltip>
           </Box>
         </Stack>
         <Typography variant="body1">
