@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented in this file.
 
+## [0.5.1]
+
+- Fix plugin dynamic import configuration issue - all plugin files must be prefixed with `p_`.
+
 ## [0.5.0]
 
 - Migrate build tooling from Create React App to Vite 8.
