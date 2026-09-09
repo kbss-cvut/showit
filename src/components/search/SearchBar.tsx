@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useSearch, SearchResult } from "../../api/WordsAPI";
 import { useHistory } from "react-router-dom";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import SearchBarResult from "./SearchBarResult";
 import { generateRoute } from "../../utils/SearchUtil";
 
