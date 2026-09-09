@@ -12,6 +12,7 @@ import useRouteQuery from "../../hooks/useRouteQuery";
 import { generateTermBase } from "../../utils/Utils";
 import { SkosRelations } from "./SkosRelations";
 import { LanguageProvider } from "../../context/LanguageContext";
+import { useTermDetailPlugins } from "../../plugin/PluginRegistry";
 
 const TermPage: React.FC = () => {
   const routeQuery = useRouteQuery();
@@ -26,6 +27,7 @@ const TermPage: React.FC = () => {
     isLoading: rIsLoading,
     isError: rIsError,
   } = useRelations(data ?? undefined);
+  const plugins = useTermDetailPlugins();
 
   if (isLoading || rIsLoading) return <Loader />;
 
@@ -42,6 +44,9 @@ const TermPage: React.FC = () => {
           <Relations term={data} />
           <SkosRelations term={data} />
         </Box>
+        {plugins.map(({ id, Component }) => (
+          <Component key={id} data={data} />
+        ))}
       </LanguageProvider>
     );
   }

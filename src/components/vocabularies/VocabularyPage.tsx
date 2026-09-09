@@ -10,6 +10,7 @@ import VocabularyTerms from "./VocabularyTerms";
 import ErrorPage from "../ErrorPage";
 import useRouteQuery from "../../hooks/useRouteQuery";
 import { LanguageProvider } from "../../context/LanguageContext";
+import { useVocabularyDetailPlugins } from "../../plugin/PluginRegistry";
 
 const VocabularyPage: React.FC = () => {
   const routeQuery = useRouteQuery();
@@ -20,6 +21,7 @@ const VocabularyPage: React.FC = () => {
     isLoading: vIsLoading,
     isError: vIsError,
   } = useVocabularyTerms(vocabularyIRI);
+  const plugins = useVocabularyDetailPlugins();
 
   if (isLoading || vIsLoading) return <Loader />;
 
@@ -33,6 +35,9 @@ const VocabularyPage: React.FC = () => {
           <VocabularyDefinition description={data.description} />
           <VocabularyTerms vocabularyIri={data.$id} />
         </Box>
+        {plugins.map(({ id, Component }) => (
+          <Component key={id} />
+        ))}
       </LanguageProvider>
     );
   }

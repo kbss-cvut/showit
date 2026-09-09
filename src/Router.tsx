@@ -16,6 +16,7 @@ import TermPage from "./components/terms/TermPage";
 import VocabularyPage from "./components/vocabularies/VocabularyPage";
 import { APP_CONTEXT } from "./app/variables";
 import VocabulariesPage from "./components/vocabularies/VocabulariesPage";
+import { useAppPlugins } from "./plugin/PluginRegistry";
 
 const InitialLocationFix: React.FC = () => {
   // This is a workaround for a bug in React Router that does not work well
@@ -34,6 +35,7 @@ const InitialLocationFix: React.FC = () => {
 };
 
 const Router: React.FC = () => {
+  const plugins = useAppPlugins();
   return (
     <BrowserRouter basename={APP_CONTEXT}>
       <InitialLocationFix />
@@ -63,6 +65,9 @@ const Router: React.FC = () => {
           </Route>
         </Switch>
       </Layout>
+      {plugins.map(({ id, Component }) => (
+        <Component key={id} />
+      ))}
     </BrowserRouter>
   );
 };
