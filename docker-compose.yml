@@ -1,20 +1,12 @@
-# This is a utility file to test the mission-control docker image locally
+# This is a utility file to test the ShowIt docker image locally
 # docker-compose --env-file=.env.docker-compose up
 
 version: "3.9"
 services:
-  nginx:
-    restart: always
-    image: nginx
-    volumes:
-      - ./nginx:/etc/nginx/templates
-    ports:
-      - "1234:80"
   showit:
     env_file:
       - .env.docker-compose
     build:
       context: .
-    environment:
-      APP_CONTEXT: /prohlížíme
-      SPARQL_ENDPOINT: https://xn--slovnk-7va.gov.cz/prohlizime/sluzby/db-server/repositories/termit
+    ports:
+      - "1234:80"
