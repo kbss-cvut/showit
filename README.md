@@ -10,8 +10,7 @@ It connects to a SPARQL endpoint and lets users search, list, and explore
 vocabularies (`slovníky`) and individual terms (`pojmy`) with their definitions,
 hierarchies, and semantic relations.
 
-The application is built with **Vite** and **TypeScript**, styled with
-**Material UI (MUI)**.
+The application is built with **Vite** and **TypeScript**, styled with **Material UI (MUI)**.
 
 ## Development Requirements
 
@@ -61,7 +60,8 @@ Plugins can target one of the following views (`metadata.view`):
 
 ### Example plugin
 
-See the `CasNotationConcatGeneratorPlugin` for an example.
+See the `p_CasNotationConcatGeneratorPlugin` for an example (prefix the plugin file name with a `p_`, a prefix is
+required by Vite for [dynamic imports](https://vite.dev/guide/features#dynamic-import)).
 
 Activate it by adding its id to the `PLUGINS` environment variable:
 
