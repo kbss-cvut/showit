@@ -1,14 +1,14 @@
 import { TermBase } from "../api/TermAPI";
 
 /**
- * Aggregated object of process.env and window.__config__ to allow dynamic configuration
+ * Aggregated object of import.meta.env and window.__config__ to allow dynamic configuration
  */
 const ENV = {
-  ...Object.keys(process.env)
-    .filter((key) => key.startsWith("REACT_APP_"))
+  ...Object.keys(import.meta.env)
+    .filter((key) => key.startsWith("VITE_"))
     .reduce<Record<string, string>>((acc, key) => {
-      const strippedKey = key.replace("REACT_APP_", "");
-      acc[strippedKey] = (process.env as Record<string, string>)[key];
+      const strippedKey = key.replace("VITE_", "");
+      acc[strippedKey] = import.meta.env[key];
       return acc;
     }, {}),
   ...(window as any).__config__,
@@ -16,7 +16,7 @@ const ENV = {
 
 /**
  * Helper to make sure that all envs are defined properly
- * @param name env variable name (without the REACT_APP_ prefix)
+ * @param name env variable name (without the VITE_ prefix)
  * @param defaultValue Default variable name
  */
 export function getEnv(name: string, defaultValue?: string): string {
@@ -29,7 +29,7 @@ export function getEnv(name: string, defaultValue?: string): string {
 
 export const getVocabularyFromTermIri = (iri: string) => {
   const indexSentinel = iri.indexOf("/pojem");
-  return iri.substr(0, indexSentinel);
+  return iri.substring(0, indexSentinel);
 };
 
 export const generateTermBase = (iri: string): TermBase => {
