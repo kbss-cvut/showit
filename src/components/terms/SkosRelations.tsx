@@ -24,7 +24,7 @@ export const SkosRelations: React.FC<{ term: TermInterface }> = ({ term }) => {
   return (
     <DetailItemWrapper title="Související pojmy">
       {data[0].related.map((item) => (
-        <TermBox>
+        <TermBox key={item.$id}>
           <RelationItem
             data={item}
             key={item.$id}

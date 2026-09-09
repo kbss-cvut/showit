@@ -31,7 +31,7 @@ export async function loadPlugins(
 ): Promise<LoadedPlugin[]> {
   return await Promise.all(
     plugins.map(async ({ id, path }) => {
-      const mod = await import(/* @vite-ignore */ `${path}`);
+      const mod = await import(`./${path}.jsx`);
       return {
         id,
         Component: mod.default as React.ComponentType,

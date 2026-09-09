@@ -27,7 +27,7 @@ function resolvePluginLoadingConfig(): PluginLoadSpecification[] {
   const pluginIds = pluginsEnv.split(",");
   return pluginIds.map((pluginId) => ({
     id: pluginId,
-    path: `./plugin/${pluginId}.tsx`,
+    path: pluginId,
   }));
 }
 
