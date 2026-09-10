@@ -11,16 +11,27 @@ import {
 import {
   Add as AddIcon,
   Cancel as CancelIcon,
+  LibraryAdd as AddNewIcon,
   Replay as ResetIcon,
 } from "@mui/icons-material";
 import { TermInterface } from "../api/data/terms";
 import { PluginMetadata } from "./PluginApi";
 import { getLocalized } from "../utils/IntlUtils";
 import { useLanguage } from "../context/LanguageContext";
+import theme from "../app/theme";
+
+declare type Value = {
+  label: string;
+  notation: string;
+};
 
 const initialState = {
-  notation: "",
-  label: "",
+  value: [
+    {
+      notation: "",
+      label: "",
+    },
+  ] as Value[],
   isOpen: false,
 };
 let storedState = { ...initialState };
@@ -29,28 +40,43 @@ const CasNotationConcatGeneratorPlugin: React.FC<{ data: TermInterface }> = ({
   data,
 }) => {
   const { language } = useLanguage();
-  const [notation, setNotation] = React.useState(storedState.notation);
-  const [label, setLabel] = React.useState(storedState.label);
+  const [value, setValue] = React.useState<Value[]>(storedState.value);
   const [isOpen, setIsOpen] = React.useState(storedState.isOpen ?? true);
-  const onAdd = () => {
+  const paperRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const paper = paperRef.current;
+    if (paper && paper.scrollHeight > paper.clientHeight) {
+      paper.scrollTo({ top: paper.scrollHeight, behavior: "smooth" });
+    }
+  }, [value]);
+
+  const addCurrentTerm = (value: Value[]) => {
+    const currentRow = value[value.length - 1];
     const newLabel =
-      label +
-      (label.length > 0 ? " " : "") +
+      currentRow.label +
+      (currentRow.label.length > 0 ? " " : "") +
       getLocalized(data.label, language);
     const newNotation =
-      notation +
+      currentRow.notation +
       (data.notation.length > 0 ? data.notation.join() : data.notation);
-    setLabel(newLabel);
-    setNotation(newNotation);
-    storedState = {
-      ...storedState,
+    const newValue = value.length > 1 ? value.slice(0, value.length - 1) : [];
+    newValue.push({
       label: newLabel,
       notation: newNotation,
-    };
+    });
+    setValue(newValue);
+    storedState.value = [...newValue];
+  };
+  const onAdd = () => {
+    addCurrentTerm(value);
+  };
+  const onAddNewLine = () => {
+    const newValue = [...value, { notation: "", label: "" }];
+    addCurrentTerm(newValue);
   };
   const onReset = () => {
-    setNotation("");
-    setLabel("");
+    setValue([{ ...initialState.value[0] }]);
     storedState = { ...initialState, isOpen };
   };
   const onClose = () => {
@@ -84,9 +110,13 @@ const CasNotationConcatGeneratorPlugin: React.FC<{ data: TermInterface }> = ({
 
   return (
     <Paper
+      ref={paperRef}
       elevation={4}
       sx={{
         minWidth: "33%",
+        maxHeight: "33.333vh",
+        overflowY: "auto",
+        boxSizing: "border-box",
         position: "fixed",
         bottom: 16,
         left: "50%",
@@ -94,7 +124,7 @@ const CasNotationConcatGeneratorPlugin: React.FC<{ data: TermInterface }> = ({
         px: 3,
         py: 1.5,
         display: "flex",
-        alignItems: "center",
+        alignItems: "flex-start",
         gap: 2,
         zIndex: (theme) => theme.zIndex.tooltip,
       }}
@@ -103,13 +133,24 @@ const CasNotationConcatGeneratorPlugin: React.FC<{ data: TermInterface }> = ({
         <Stack
           direction="row"
           spacing={2}
-          sx={{ justifyContent: "space-between" }}
+          sx={{
+            justifyContent: "space-between",
+            position: "sticky",
+            top: 0,
+            zIndex: 1,
+            bgcolor: "background.paper",
+          }}
         >
           <Typography variant="h6">Generátor notačních kódů</Typography>
           <Box>
             <Tooltip title="Přidat pojem">
               <Button onClick={onAdd} color="primary">
                 <AddIcon />
+              </Button>
+            </Tooltip>
+            <Tooltip title="Začít nový řádek a přidat pojem">
+              <Button onClick={onAddNewLine} color="primary">
+                <AddNewIcon />
               </Button>
             </Tooltip>
             <Tooltip title="Resetovat">
@@ -124,18 +165,29 @@ const CasNotationConcatGeneratorPlugin: React.FC<{ data: TermInterface }> = ({
             </Tooltip>
           </Box>
         </Stack>
-        <Typography variant="body1">
-          <Typography component="span" fontWeight="fontWeightBold">
-            Název:
-          </Typography>{" "}
-          {label}
-        </Typography>
-        <Typography variant="body1">
-          <Typography component="span" fontWeight="fontWeightBold">
-            Notace:
-          </Typography>{" "}
-          {notation}
-        </Typography>
+        {value.map((v, i) => (
+          <Box
+            key={i}
+            sx={{
+              borderTop: i > 0 ? 1 : 0,
+              borderColor: theme.palette.primary.main,
+              pt: i > 0 ? 0.5 : 0,
+            }}
+          >
+            <Typography variant="body1">
+              <Typography component="span" fontWeight="fontWeightBold">
+                Název:
+              </Typography>{" "}
+              {v.label}
+            </Typography>
+            <Typography variant="body1">
+              <Typography component="span" fontWeight="fontWeightBold">
+                Notace:
+              </Typography>{" "}
+              {v.notation}
+            </Typography>
+          </Box>
+        ))}
       </Stack>
     </Paper>
   );
