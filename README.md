@@ -1,13 +1,12 @@
 # ShowIt
 
-A React-based web application for browsing SKOS vocabularies and terms published by
-TermIt and the SGoV (Sémantický slovník pojmů veřejné správy) ecosystem.
+A React-based web application for browsing SKOS concept schemes.
 
 ## Overview
 
 ShowIt is a lightweight, read-only browser for RDF vocabularies and their terms.
 It connects to a SPARQL endpoint and lets users search, list, and explore
-vocabularies (`slovníky`) and individual terms (`pojmy`) with their definitions,
+vocabularies (`slovníky` - SKOS ConceptSchemes) and individual terms (`pojmy` - SKOS Concepts) with their definitions,
 hierarchies, and semantic relations.
 
 The application is built with **Vite** and **TypeScript**, styled with **Material UI (MUI)**.
@@ -26,7 +25,7 @@ The application reads configuration from two sources:
    | ----------------- | --------------------------------------- | ------------------------------------------- |
    | `SPARQL_ENDPOINT` | SPARQL endpoint for ldkit queries       | `http://localhost:7200/repositories/termit` |
    | `SUGGESTED_WORDS` | Comma-separated list of suggested words | `Délka,Lokalita,Dokumentace,Demolice`       |
-   | `APP_CONTEXT`     | Base URL path of the application        | `/prohlizime`                               |
+   | `APP_CONTEXT`     | Base URL path of the application        | `/showit`                                   |
    | `PLUGINS`         | Comma-separated list of plugin ids      | `CasNotationConcatGeneratorPlugin`          |
 
 2. **Runtime `config.js`** – For deployments where the build is served statically,
@@ -42,7 +41,8 @@ from `src/plugin/`.
 Each plugin file must:
 
 - Export its React component as the **default export**.
-- Export a `metadata` object with at least an `id` (should be the same as the plugin's file name) and target `view`.
+- Export a `metadata` object with at least an `id` and target `view`.
+- Be declared in a file call `p_${id}.tsx` in the `src/plugin` directory.
 
 See `src/plugin/PluginApi.tsx` for the loading API and available plugin views.
 
