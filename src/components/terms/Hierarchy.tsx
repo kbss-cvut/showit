@@ -20,7 +20,12 @@ export const Hierarchy: React.FC<HierarchyProps> = ({ term }) => {
   return (
     <Container>
       <Box py={2} mb={2} px={2} mt={4}>
-        <Box borderLeft={4} pr={6} borderColor="primary.main">
+        <Box
+          borderLeft={4}
+          pr={6}
+          borderColor="primary.main"
+          sx={{ color: "#000000" }}
+        >
           <Box pl={4}>
             <Typography variant="h5">Hierarchie</Typography>
           </Box>
@@ -56,7 +61,12 @@ export const DetailItemWrapper: React.FC<DetailItemWrapperProps> = (props) => {
   return (
     <Container>
       <Box py={2} mb={2} px={2} mt={4}>
-        <Box borderLeft={4} pr={6} borderColor="primary.main">
+        <Box
+          borderLeft={4}
+          pr={6}
+          borderColor="primary.main"
+          sx={{ color: "#000000" }}
+        >
           <Box display="flex">
             <Box pl={4}>
               <Typography variant="h5">{props.title}</Typography>

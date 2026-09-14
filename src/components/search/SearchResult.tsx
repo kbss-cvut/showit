@@ -62,7 +62,10 @@ const SearchResultView: React.FC<SearchResult> = ({
   return (
     <Container>
       <RouteLink to={routeProps} underline="none">
-        <SearchCard borderColor={`${border} !important`}>
+        <SearchCard
+          borderColor={`${border} !important`}
+          sx={{ color: "#000000" }}
+        >
           <Box display="flex">
             <TypeIcon type={type} width={17} height={20} />
             {type.includes(skos.ConceptScheme) ? (

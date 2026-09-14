@@ -35,7 +35,7 @@ export const LanguageSelector: React.FC<{
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option} value={option}>
+          <MenuItem key={option} value={option} sx={{ color: "text.disabled" }}>
             {option}
           </MenuItem>
         ))}

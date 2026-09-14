@@ -16,7 +16,7 @@ const AccordionDescription: React.FC<AccordionDescriptionProps> = ({
     ? getLocalized(term.definition, language)
     : "Pojem nemá definici";
 
-  return <Typography>{description}</Typography>;
+  return <Typography color="#000000">{description}</Typography>;
 };
 
 export default AccordionDescription;

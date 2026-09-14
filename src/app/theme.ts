@@ -1,33 +1,72 @@
 import { createTheme } from "@mui/material";
+import { getEnv } from "../utils/Utils";
 
-const primary = "#00BC58";
-const secondary = "#3F3D56";
-const primaryText = "#000000";
-const secondaryText = "#FFFFFF";
-const lightText = "#797979";
+declare type Colors = {
+  primary: string;
+  secondary: string;
+  primaryText: string;
+  secondaryText: string;
+  lightText: string;
+};
+
+/**
+ * Named color schemes selectable via the "THEME" configuration variable (see getEnv).
+ * Add new schemes here and reference their key in the THEME env/config value.
+ */
+const colorSchemes: Record<string, Colors> = {
+  default: {
+    primary: "#00BC58",
+    secondary: "#3F3D56",
+    primaryText: "#000000",
+    secondaryText: "#FFFFFF",
+    lightText: "#797979",
+  },
+  blue: {
+    primary: "#00469b",
+    secondary: "#fab413",
+    primaryText: "#f2f2f2",
+    secondaryText: "#E7E7E7",
+    lightText: "#797979",
+  },
+};
+
+const DEFAULT_SCHEME = "default";
+
+function resolveColors(): Colors {
+  const schemeName = getEnv("THEME", DEFAULT_SCHEME);
+  const colors = colorSchemes[schemeName];
+  if (!colors) {
+    console.warn(
+      `Unknown THEME "${schemeName}", falling back to "${DEFAULT_SCHEME}"`
+    );
+    return colorSchemes[DEFAULT_SCHEME];
+  }
+  return colors;
+}
+
+const activeColors = resolveColors();
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: primary,
+      main: activeColors.primary,
     },
     secondary: {
-      main: secondary,
+      main: activeColors.secondary,
     },
     text: {
-      primary: primaryText,
-      secondary: secondaryText,
-      disabled: lightText,
+      primary: activeColors.primaryText,
+      secondary: activeColors.secondaryText,
+      disabled: activeColors.lightText,
     },
-    divider: secondaryText,
-    //  background: { default: 'black' },
+    divider: activeColors.secondaryText,
   },
   typography: {
     fontFamily: [
+      "Roboto",
       "-apple-system",
       "BlinkMacSystemFont",
       '"Segoe UI Light"',
-      "Roboto",
       '"Helvetica Neue"',
       "Arial",
       "sans-serif",
