@@ -18,6 +18,7 @@ const SearchBarResult: React.FC<SearchResult> = ({
           whiteSpace: "nowrap",
           overflow: "hidden",
           textOverflow: "ellipsis",
+          color: "#000000",
         }}
         dangerouslySetInnerHTML={{
           __html:

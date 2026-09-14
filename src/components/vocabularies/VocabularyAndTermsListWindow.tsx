@@ -8,6 +8,7 @@ import { getLocalized, MultilingualString } from "../../utils/IntlUtils";
 import { Box, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useLanguage } from "../../context/LanguageContext";
+import theme from "../../app/theme";
 
 //Unfortunately the makeStyles performs better than styled
 //Even though makeStyles is considered legacy, I would leave it here for now
@@ -122,6 +123,9 @@ const VocabularyAndTermsListWindow: React.FC<VocabularyAndTermsListProps> = ({
         fullWidth
         placeholder={searchHelperText}
         InputProps={{
+          sx: {
+            color: theme.palette.text.disabled,
+          },
           endAdornment: endAdornment,
         }}
       />

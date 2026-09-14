@@ -29,7 +29,7 @@ const filterOptions = (options: SearchResult[]) => {
 const useStyles = makeStyles((theme) => ({
   inputRoot: (props: SearchBarProps) => ({
     border: "1px solid #e2e2e1",
-    color: theme.palette.text.primary,
+    color: theme.palette.text.disabled,
     borderRadius: props.size === "large" ? 26 : 16,
     fontSize: props.size === "large" ? 26 : 16,
     height: props.size === "large" ? 63 : 38,

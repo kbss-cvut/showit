@@ -29,7 +29,7 @@ const MaxLineText: React.FC<TypographyProps & MaxLineTextProp> = (props) => {
       right: 0,
       width: "1.7rem",
       height: "2.1rem",
-      background: theme.palette.text.secondary,
+      bgColor: "#FFFFFF",
     },
     "& em": {
       fontStyle: "normal",

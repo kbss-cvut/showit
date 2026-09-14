@@ -25,6 +25,7 @@ const defaultProps = {
   py: 2,
   border: 2,
   borderRadius: "16px",
+  color: "#000000",
 };
 
 const IllustrationWrapper = styled(Grid)(({ theme }) => ({
