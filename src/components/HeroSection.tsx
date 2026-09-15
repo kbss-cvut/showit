@@ -23,10 +23,10 @@ const HeroSection: React.FC = () => {
       <Container component="section" maxWidth="lg">
         <Grid container justifyContent="center" alignItems="center" spacing={1}>
           <Grid item md={5} xs={10}>
-            <Typography variant="h1" color="textSecondary" gutterBottom>
+            <Typography variant="h1" color="textPrimary" gutterBottom>
               Hledat význam není těžké.
             </Typography>
-            <Typography variant="h2" color="textSecondary">
+            <Typography variant="h2" color="textPrimary">
               Stačí vědět, kde hledat.
             </Typography>
           </Grid>
@@ -52,9 +52,9 @@ const HeroSection: React.FC = () => {
           <Grid item md={10} xs={12}>
             <SuggestedWords />
             <Box display={"flex"} justifyContent={"center"} mt={1}>
-              <Typography variant={"h6"} color="textSecondary">
+              <Typography variant={"h6"} color="textPrimary">
                 Nebo si prohlédněte dostupné{" "}
-                <RouteLink to={`/slovniky`} color="textSecondary" variant="h6">
+                <RouteLink to={`/slovniky`} color="textPrimary" variant="h6">
                   slovníky
                 </RouteLink>
               </Typography>

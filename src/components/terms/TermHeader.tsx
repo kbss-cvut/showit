@@ -19,7 +19,7 @@ const TermHeader: React.FC<DetailHeaderProps> = ({ term }) => {
 
   const vocabularyRoute = generateVocabularyRoute(vocabulary.$id);
   const above = (
-    <RouteLink to={vocabularyRoute} variant="h5" color="textSecondary">
+    <RouteLink to={vocabularyRoute} variant="h5" color="textPrimary">
       {getLocalized(vocabulary.label, language) || vocabulary.$id}
     </RouteLink>
   );

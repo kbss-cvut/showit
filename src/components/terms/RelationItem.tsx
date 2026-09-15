@@ -50,11 +50,11 @@ export const RelationItem: React.FC<RelationTermProps> = ({
         <BoxWrapper current={false}>
           <StyledTerm current={false} square elevation={0}>
             {showVocabulary && (
-              <Typography variant="body2" color="textSecondary">
+              <Typography variant="body2" color="textPrimary">
                 {getLocalized(data.vocabulary.label, language)}
               </Typography>
             )}
-            <RouteLink to={routeProps} variant="h6" color="textSecondary">
+            <RouteLink to={routeProps} variant="h6" color="textPrimary">
               {getLocalized(data.label, language)}
             </RouteLink>
           </StyledTerm>
@@ -74,7 +74,7 @@ export const CurrentRelationTerm: React.FC<CurrentRelationTermProps> = ({
   return (
     <BoxWrapper current={true} flex={1}>
       <StyledTerm current={true} square elevation={0}>
-        <Typography variant="h6" color="textSecondary">
+        <Typography variant="h6" color="textPrimary">
           {getLocalized(data.label, language)}
         </Typography>
       </StyledTerm>

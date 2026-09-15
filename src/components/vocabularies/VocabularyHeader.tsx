@@ -8,7 +8,7 @@ import { getLocalized } from "../../utils/IntlUtils";
 
 const countHelper = (length: number) => {
   if (length === 1) return "pojem";
-  else if (length <= 4) return "pojmy";
+  else if (length > 1 && length <= 4) return "pojmy";
   else return "pojmů";
 };
 
@@ -22,7 +22,7 @@ const VocabularyHeader: React.FC<DetailVocabularyHeaderProps> = ({
   const { data = [], isLoading } = useVocabularyTerms(vocabulary.$id);
   const { language } = useLanguage();
   const above = (
-    <Typography variant="h5" color="textSecondary">
+    <Typography variant="h5" color="textPrimary">
       {isLoading
         ? "Načítání pojmů"
         : `${data.length} ${countHelper(data.length)}`}
