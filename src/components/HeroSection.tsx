@@ -1,9 +1,11 @@
 import { Box, Container, Grid, styled, Typography } from "@mui/material";
+import { darken } from "@mui/material/styles";
 import React from "react";
 import { ReactComponent as Hero } from "../assets/hero.svg";
 import SuggestedWords from "./SuggestedWords";
 import SearchBar from "./search/SearchBar";
 import RouteLink from "./RouteLink";
+import theme from "../app/theme";
 
 const HeroWrapper = styled(Grid)(({ theme }) => ({
   textAlign: "right",
@@ -30,10 +32,18 @@ const HeroSection: React.FC = () => {
           </Grid>
           <HeroWrapper item md={4}>
             <Hero
-              style={{
-                width: "80%",
-                maxHeight: 330,
-              }}
+              style={
+                {
+                  width: "80%",
+                  maxHeight: 330,
+                  color: theme.palette.primary.main,
+                  "--secondary-accent-color": theme.palette.secondary.main,
+                  "--secondary-accent-color-dark": darken(
+                    theme.palette.secondary.main,
+                    0.3
+                  ),
+                } as React.CSSProperties
+              }
             />
           </HeroWrapper>
           <Grid item md={10} xs={12}>

@@ -13,7 +13,10 @@ const TermResult: React.FC<SearchTerm> = (props) => {
   return (
     <Container>
       <RouteLink to={route} underline="none">
-        <SearchCard borderColor={`${theme.palette.primary.main} !important`}>
+        <SearchCard
+          borderColor={`${theme.palette.primary.main} !important`}
+          color={theme.palette.common.black}
+        >
           <DefinitionSnippet {...props} />
           <Box mt={1}>
             <Typography variant="h6">{props.vocabulary.title}</Typography>

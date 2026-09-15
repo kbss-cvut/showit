@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { isValidHttpUrl } from "../../utils/TermUtils";
 import { Comment } from "@mui/icons-material";
+import theme from "../../app/theme";
 
 interface DefinitionWrapperProps {
   definition?: string | null;
@@ -25,7 +26,7 @@ const defaultProps = {
   py: 2,
   border: 2,
   borderRadius: "16px",
-  color: "#000000",
+  color: theme.palette.common.black,
 };
 
 const IllustrationWrapper = styled(Grid)(({ theme }) => ({

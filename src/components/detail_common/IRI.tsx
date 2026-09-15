@@ -16,7 +16,7 @@ export interface IriItem {
 
 const Content = React.forwardRef((props: any, ref: any) => {
   return (
-    <Button {...props} ref={ref} fullWidth variant="text" color="secondary">
+    <Button {...props} ref={ref} variant="text" color="secondary">
       <Box display="flex">
         <Copy style={{ maxHeight: 33, marginRight: 16 }} />
         <Typography variant="h5" color="textSecondary">

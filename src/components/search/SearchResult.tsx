@@ -28,7 +28,7 @@ const HighlightedText = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const HighlightedTextDefinition = styled(Typography)(({ theme }) => ({
+const HighlightedTextDefinition = styled(Typography)(() => ({
   alignSelf: "start",
   whiteSpace: "nowrap",
   overflow: "hidden",
@@ -64,7 +64,7 @@ const SearchResultView: React.FC<SearchResult> = ({
       <RouteLink to={routeProps} underline="none">
         <SearchCard
           borderColor={`${border} !important`}
-          sx={{ color: "#000000" }}
+          sx={{ color: theme.palette.common.black }}
         >
           <Box display="flex">
             <TypeIcon type={type} width={17} height={20} />
