@@ -44,7 +44,7 @@ const Footer: React.FC<FooterProps> = (props) => {
               target="_blank"
               rel="noopener noreferrer"
               title="KBSS FEL ČVUT v Praze"
-              color="textSecondary"
+              color="textPrimary"
             >
               &copy;&nbsp;KBSS FEL ČVUT v Praze, {new Date().getFullYear()}
             </Link>

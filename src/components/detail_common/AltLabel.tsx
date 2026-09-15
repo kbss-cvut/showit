@@ -16,7 +16,7 @@ const AltLabel: React.FC<AltLabelProps> = ({ altLabels }) => {
   }
 
   return (
-    <Typography variant="h5" color="textSecondary">
+    <Typography variant="h5" color="textPrimary">
       {strAltLabels.join(", ")}
     </Typography>
   );

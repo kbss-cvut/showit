@@ -19,7 +19,7 @@ const Content = React.forwardRef((props: any, ref: any) => {
     <Button {...props} ref={ref} variant="text" color="secondary">
       <Box display="flex">
         <Copy style={{ maxHeight: 33, marginRight: 16 }} />
-        <Typography variant="h5" color="textSecondary">
+        <Typography variant="h5" color="textPrimary">
           IRI
         </Typography>
       </Box>

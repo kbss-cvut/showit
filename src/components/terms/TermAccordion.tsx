@@ -59,7 +59,7 @@ const AccordionDetails = withStyles((theme) => ({
 
 const ExpandIcon = withStyles((theme) => ({
   root: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
   },
 }))(ExpandMoreIcon);
 
@@ -84,7 +84,7 @@ export const TermAccordion: React.FC<TermAccordionProps> = (props) => {
         <AccordionSummary expandIcon={<ExpandIcon />}>
           <Box>
             {props.showVocabulary && (
-              <Typography variant="body2" color="textSecondary">
+              <Typography variant="body2" color="textPrimary">
                 {getLocalized(props.term.vocabulary.label)}
               </Typography>
             )}
@@ -92,7 +92,7 @@ export const TermAccordion: React.FC<TermAccordionProps> = (props) => {
               onClick={(event) => event.stopPropagation()}
               onFocus={(event) => event.stopPropagation()}
             >
-              <RouteLink to={routeProps} variant="h6" color="textSecondary">
+              <RouteLink to={routeProps} variant="h6" color="textPrimary">
                 {getLocalized(props.term.label, language)}
               </RouteLink>
             </FormControl>

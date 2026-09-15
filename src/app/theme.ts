@@ -17,7 +17,7 @@ const colorSchemes: Record<string, Colors> = {
   default: {
     primary: "#00BC58",
     secondary: "#3F3D56",
-    primaryText: "#000000",
+    primaryText: "#FFFFFF",
     secondaryText: "#FFFFFF",
     lightText: "#797979",
   },
@@ -25,7 +25,7 @@ const colorSchemes: Record<string, Colors> = {
     primary: "#00469b",
     secondary: "#fab413",
     primaryText: "#f2f2f2",
-    secondaryText: "#E7E7E7",
+    secondaryText: "#262626",
     lightText: "#797979",
   },
 };

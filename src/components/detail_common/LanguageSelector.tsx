@@ -24,14 +24,14 @@ export const LanguageSelector: React.FC<{
       sx={{ marginRight: "1rem" }}
     >
       <Tooltip title={"Zobrazit překlad v jazyce: " + language}>
-        <TranslateIcon sx={{ color: "text.secondary" }} />
+        <TranslateIcon sx={{ color: "text.primary" }} />
       </Tooltip>
       <Select
         value={language}
         onChange={(e) => setLanguage(e.target.value)}
         sx={{
-          color: "text.secondary",
-          ".MuiSvgIcon-root": { color: "text.secondary" },
+          color: "text.primary",
+          ".MuiSvgIcon-root": { color: "text.primary" },
         }}
       >
         {options.map((option) => (

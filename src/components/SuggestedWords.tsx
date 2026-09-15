@@ -26,7 +26,7 @@ const SuggestedWords: React.FC = () => {
   return (
     <Container>
       <Wrapper>
-        <Typography variant="h5" sx={{ mr: 3 }} color="textSecondary">
+        <Typography variant="h5" sx={{ mr: 3 }} color="textPrimary">
           Navrhovaná slova:
         </Typography>
 
@@ -35,7 +35,7 @@ const SuggestedWords: React.FC = () => {
             key={word}
             to={`/hledat?label=${word}`}
             sx={{ mr: 3 }}
-            color="textSecondary"
+            color="textPrimary"
             variant="h5"
           >
             {word}

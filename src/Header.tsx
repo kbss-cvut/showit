@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { ReactComponent as NavIcon } from "./assets/navIcon.svg";
 import SearchBar from "./components/search/SearchBar";
 import RouteLink from "./components/RouteLink";
+import theme from "./app/theme";
 
 interface HeaderProps {
   showSearch?: boolean;
@@ -39,7 +40,7 @@ const Header: React.FC<HeaderProps> = (props) => {
           underline="none"
           homeButtonVisibility={homeButtonVisible}
         >
-          <Box display="flex">
+          <Box display="flex" sx={{ color: theme.palette.text.primary }}>
             <Box display="flex" alignItems="center" justifyContent="center">
               <NavIcon display="block" />
             </Box>
