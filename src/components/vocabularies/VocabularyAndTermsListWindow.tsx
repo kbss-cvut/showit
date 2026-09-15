@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
     overflow: "hidden",
     textOverflow: "ellipsis",
     textDecoration: "none",
-    color: "#000000",
+    color: theme.palette.common.black,
     "& em": {
       fontStyle: "normal",
       fontWeight: 700,
@@ -35,7 +35,7 @@ const useStyles = makeStyles(() => ({
   },
   noDecoration: {
     textDecoration: "none",
-    color: "#000000",
+    color: theme.palette.common.black,
   },
 }));
 

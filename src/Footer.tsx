@@ -7,6 +7,7 @@ const Illustration = styled(FooterImage)(({ theme }) => ({
   bottom: "-16px",
   right: "60px",
   maxHeight: 115,
+  color: theme.palette.primary.main,
   [theme.breakpoints.down("sm")]: {
     display: "none",
   },

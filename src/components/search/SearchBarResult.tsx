@@ -3,6 +3,7 @@ import { generateStyledSnippet } from "../../utils/TermUtils";
 import { SearchResult } from "../../api/WordsAPI";
 import { Box } from "@mui/material";
 import TypeIcon from "../TypeIcon";
+import theme from "../../app/theme";
 
 const SearchBarResult: React.FC<SearchResult> = ({
   displayText,
@@ -18,7 +19,7 @@ const SearchBarResult: React.FC<SearchResult> = ({
           whiteSpace: "nowrap",
           overflow: "hidden",
           textOverflow: "ellipsis",
-          color: "#000000",
+          color: theme.palette.common.black,
         }}
         dangerouslySetInnerHTML={{
           __html:

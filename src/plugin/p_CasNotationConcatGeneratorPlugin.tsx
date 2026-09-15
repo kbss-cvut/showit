@@ -19,6 +19,7 @@ import { PluginMetadata } from "./PluginApi";
 import { getLocalized } from "../utils/IntlUtils";
 import { useLanguage } from "../context/LanguageContext";
 import mainTheme from "../app/theme";
+import theme from "../app/theme";
 
 declare type Value = {
   label: string;
@@ -126,8 +127,8 @@ const CasNotationConcatGeneratorPlugin: React.FC<{ data: TermInterface }> = ({
         display: "flex",
         alignItems: "flex-start",
         gap: 2,
-        zIndex: (theme) => theme.zIndex.tooltip,
-        color: "#000000",
+        zIndex: theme.zIndex.tooltip,
+        color: theme.palette.common.black,
       }}
     >
       <Stack direction="column" spacing={0.5} width="100%">
