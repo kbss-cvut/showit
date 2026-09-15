@@ -18,19 +18,20 @@ const DetailPageHeader: React.FC<DetailPageHeaderProps> = (props) => {
   return (
     <DetailHeaderWrapper>
       <Grid container>
-        <Grid item md={9} sm={7} xs={7}>
+        <Grid item md={9} sm={7} xs={12}>
           {props.aboveLabel}
           <Typography variant="h3" color="textSecondary">
             {props.label}
           </Typography>
           {props.belowLabel}
         </Grid>
-        <Grid item md={3} sm={5} xs={5}>
+        <Grid item md={3} sm={5} xs={12}>
           <Stack
             direction="row"
             spacing={1}
             alignItems="center"
-            justifyContent="flex-end"
+            justifyContent={{ xs: "flex-start", sm: "flex-end" }}
+            sx={{ mt: { xs: 1, sm: 0 } }}
           >
             <LanguageSelector
               multilingualAttributes={props.multilingualAttributes}
