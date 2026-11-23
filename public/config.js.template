@@ -4,5 +4,6 @@ window.__config__ = {
   APP_CONTEXT: '${APP_CONTEXT}',
   SUGGESTED_WORDS: '${SUGGESTED_WORDS}',
   PLUGINS: '${PLUGINS}',
-  THEME: '${THEME}'
+  THEME: '${THEME}',
+  RELATIONS: '${RELATIONS}'
 }
