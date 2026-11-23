@@ -306,6 +306,18 @@ WHERE {
 };
 
 export const getTermSkosRelationsQuery = (termIri: string) => {
+  return getTermDeclaredRelationsQuery(termIri, [
+    skos.related,
+    skos.relatedMatch,
+  ]);
+};
+
+export const getTermDeclaredRelationsQuery = (
+  termIri: string,
+  properties: string[]
+) => {
+  const propsAlt = properties.map((p) => sparql`${n(p)}`).join("|");
+  // Always returns the property values connected via `skos:related`
   return sparql`
   CONSTRUCT {
     ?term a ${n(skos.Concept)} ; a ${n(ldkit.Resource)} .
@@ -315,7 +327,7 @@ export const getTermSkosRelationsQuery = (termIri: string) => {
     ?relatedVocabulary ${n(dcterms.title)} ?relatedVocabularyTitle .
   } WHERE {
     BIND(${n(termIri)} as ?term)
-    ?term (${n(skos.related)}|${n(skos.relatedMatch)}) ?related .
+    ?term ${propsAlt} ?related .
     ?related ${n(skos.prefLabel)} ?relatedLabel .
     ?related ${n(skos.inScheme)} ?relatedVocabulary .
     ?relatedVocabulary ${n(dcterms.title)} ?relatedVocabularyTitle .
