@@ -13,6 +13,7 @@ import { generateTermBase } from "../../utils/Utils";
 import { SkosRelations } from "./SkosRelations";
 import { LanguageProvider } from "../../context/LanguageContext";
 import { useTermDetailPlugins } from "../../plugin/PluginRegistry";
+import { CustomRelations } from "./CustomRelations";
 
 const TermPage: React.FC = () => {
   const routeQuery = useRouteQuery();
@@ -43,6 +44,7 @@ const TermPage: React.FC = () => {
           {/**Relations component checks if the term is empty, because it is the last one**/}
           <Relations term={data} />
           <SkosRelations term={data} />
+          <CustomRelations term={data} />
         </Box>
         {plugins.map(({ id, Component }) => (
           <Component key={id} data={data} />

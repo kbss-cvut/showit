@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 
 import {
   getPropertyRelationsQuery,
+  getTermDeclaredRelationsQuery,
   getTermRelationsQuery,
   getTermSkosRelationsQuery,
   TermBaseInterface,
@@ -66,6 +67,28 @@ export const getSkosRelations = async (
   );
 };
 
+export interface CustomRelationGroup {
+  property: string;
+  results: TermSkosRelationsInterface[];
+}
+
+export const getDeclaredCustomRelations = async (
+  term: TermInterface | undefined,
+  customRelations: string[]
+): Promise<CustomRelationGroup[]> => {
+  if (typeof term === "undefined") {
+    return Promise.reject("Invalid term");
+  }
+  return Promise.all(
+    customRelations.map(async (property) => ({
+      property,
+      results: await TermsSkosRelationsResource.query(
+        getTermDeclaredRelationsQuery(term.$id, [property])
+      ),
+    }))
+  );
+};
+
 export type RelationResult = ReturnType<typeof getRelations> extends Promise<
   (infer U)[]
 >
@@ -95,4 +118,18 @@ export const useSkosRelations = (term: TermInterface | undefined) => {
     enabled: !!term,
     notifyOnChangeProps: ["data", "isError"],
   });
+};
+
+export const useCustomRelations = (
+  term: TermInterface | undefined,
+  customRelations: string[]
+) => {
+  return useQuery(
+    ["custom-relations", term?.$id, customRelations],
+    () => getDeclaredCustomRelations(term, customRelations),
+    {
+      enabled: !!term,
+      notifyOnChangeProps: ["data", "isError"],
+    }
+  );
 };
