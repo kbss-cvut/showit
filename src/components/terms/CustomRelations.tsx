@@ -29,7 +29,7 @@ const CustomRelationSection: React.FC<{ property: string }> = ({
 export const CustomRelations: React.FC<{ term: TermInterface }> = ({
   term,
 }) => {
-  const customRelations = getEnv("RELATIONS").split(",");
+  const customRelations = getEnv("RELATIONS", "").split(",");
   const { data, isLoading, isSuccess } = useCustomRelations(
     term,
     customRelations
