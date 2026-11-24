@@ -21,13 +21,14 @@ The application reads configuration from two sources:
 
 1. **Build-time environment variables** prefixed with `VITE_`:
 
-   | Variable          | Purpose                                   | Example                                     |
-   | ----------------- | ----------------------------------------- | ------------------------------------------- |
-   | `SPARQL_ENDPOINT` | SPARQL endpoint for ldkit queries         | `http://localhost:7200/repositories/termit` |
-   | `SUGGESTED_WORDS` | Comma-separated list of suggested words   | `Délka,Lokalita,Dokumentace,Demolice`       |
-   | `APP_CONTEXT`     | Base URL path of the application          | `/showit`                                   |
-   | `PLUGINS`         | Comma-separated list of plugin ids        | `CasNotationConcatGeneratorPlugin`          |
-   | `THEME`           | Color scheme key (see `src/app/theme.ts`) | `default`, `blue`                           |
+   | Variable          | Purpose                                                                                                                                     | Example                                          |
+   | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+   | `SPARQL_ENDPOINT` | SPARQL endpoint for ldkit queries                                                                                                           | `http://localhost:7200/repositories/termit`      |
+   | `SUGGESTED_WORDS` | Comma-separated list of suggested words                                                                                                     | `Délka,Lokalita,Dokumentace,Demolice`            |
+   | `APP_CONTEXT`     | Base URL path of the application                                                                                                            | `/showit`                                        |
+   | `PLUGINS`         | Comma-separated list of plugin ids                                                                                                          | `CasNotationConcatGeneratorPlugin`               |
+   | `THEME`           | Color scheme key (see `src/app/theme.ts`)                                                                                                   | `default`, `blue`                                |
+   | `RELATIONS`       | Comma-separated list of custom relations (in addition to `skos:related(Match)` and modeling properties) that should be displayed for a term | `http://www.w3.org/2004/02/skos/core#exactMatch` |
 
 2. **Runtime `config.js`** – For deployments where the build is served statically,
    `public/config.js` (or an equivalent file) can inject values through `window.__config__`.
